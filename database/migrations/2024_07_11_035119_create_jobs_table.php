@@ -13,6 +13,18 @@ return new class extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
+            $table->string('job_name');
+            $table->bigInteger('departement_id');
+            $table->bigInteger('position_id');
+            $table->integer('max_age');
+            $table->string('min_education');
+            $table->string('major_education')->unsigned();
+            $table->string('salary');
+            $table->text('job_desc');
+            $table->text('job_criteria');
+            $table->string('status');
+            $table->date('open_date');
+            $table->date('close_date');
             $table->timestamps();
         });
     }
