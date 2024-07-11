@@ -8,15 +8,17 @@
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Input</h3>
-                <p class="text-subtitle text-muted">Give textual form controls like input upgrade with custom styles,
-                    sizing, focus states, and more.</p>
+                <h3>{{$data['page_name']}} </h3>
+                <p class="text-subtitle text-muted">{{$data['page_subname']}}</p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Input</li>
+                        @foreach ($data['page_breadcum'] as $item)
+                            <li class="breadcrumb-item {{$item['status']}}"><a href="{{$item['link']}}">{{$item['name']}}</a></li>
+                        @endforeach
+                        
+                        {{-- <li class="breadcrumb-item active" aria-current="page">Input</li> --}}
                     </ol>
                 </nav>
             </div>

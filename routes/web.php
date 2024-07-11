@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\DepartemenController;
+use App\Http\Controllers\Admin\JabatanController;
+use App\Http\Controllers\Admin\LowonganController;
 use App\Http\Controllers\Auth\ForgetPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -31,5 +34,10 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile', [DashboardController::class, 'profile'])->name('profile');
     Route::post('/profile/update', [DashboardController::class, 'updateProfile'])->name('updateProfile');
+
+    Route::resource('departement',DepartemenController::class);
+    Route::resource('position',JabatanController::class);
+    Route::resource('jobs',LowonganController::class);
+
 
 });

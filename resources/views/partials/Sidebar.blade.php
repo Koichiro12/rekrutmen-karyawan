@@ -3,7 +3,7 @@
         <div class="sidebar-header position-relative">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="logo">
-                    <a href="index.html"><img src="{{ asset('/') }}assets/compiled/svg/logo.svg" alt="Logo"
+                    <a href="{{route('dashboard')}}"><img src="{{ asset('/') }}assets/compiled/svg/logo.svg" alt="Logo"
                             srcset=""></a>
                 </div>
                 <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
@@ -61,92 +61,19 @@
                         <i class="bi bi-stack"></i>
                         <span>Master Data</span>
                     </a>
-
                     <ul class="submenu ">
                         <li class="submenu-item  ">
-                            <a href="component-accordion.html" class="submenu-link">Data Pelamar</a>
+                            <a href="{{route('departement.index')}}" class="submenu-link">Departement</a>
                         </li>
 
                         <li class="submenu-item  ">
-                            <a href="component-alert.html" class="submenu-link">Alert</a>
-
-                        </li>
-
-                        <li class="submenu-item  ">
-                            <a href="component-badge.html" class="submenu-link">Badge</a>
+                            <a href="{{route('position.index')}}" class="submenu-link">Position</a>
 
                         </li>
 
                         <li class="submenu-item  ">
-                            <a href="component-breadcrumb.html" class="submenu-link">Breadcrumb</a>
-
+                            <a href="{{route('jobs.index')}}" class="submenu-link">Jobs</a>
                         </li>
-
-                        <li class="submenu-item  ">
-                            <a href="component-button.html" class="submenu-link">Button</a>
-
-                        </li>
-
-                        <li class="submenu-item  ">
-                            <a href="component-card.html" class="submenu-link">Card</a>
-
-                        </li>
-
-                        <li class="submenu-item  ">
-                            <a href="component-carousel.html" class="submenu-link">Carousel</a>
-
-                        </li>
-
-                        <li class="submenu-item  ">
-                            <a href="component-collapse.html" class="submenu-link">Collapse</a>
-
-                        </li>
-
-                        <li class="submenu-item  ">
-                            <a href="component-dropdown.html" class="submenu-link">Dropdown</a>
-
-                        </li>
-
-                        <li class="submenu-item  ">
-                            <a href="component-list-group.html" class="submenu-link">List Group</a>
-
-                        </li>
-
-                        <li class="submenu-item  ">
-                            <a href="component-modal.html" class="submenu-link">Modal</a>
-
-                        </li>
-
-                        <li class="submenu-item  ">
-                            <a href="component-navs.html" class="submenu-link">Navs</a>
-
-                        </li>
-
-                        <li class="submenu-item  ">
-                            <a href="component-pagination.html" class="submenu-link">Pagination</a>
-
-                        </li>
-
-                        <li class="submenu-item  ">
-                            <a href="component-progress.html" class="submenu-link">Progress</a>
-
-                        </li>
-
-                        <li class="submenu-item  ">
-                            <a href="component-spinner.html" class="submenu-link">Spinner</a>
-
-                        </li>
-
-                        <li class="submenu-item  ">
-                            <a href="component-toasts.html" class="submenu-link">Toasts</a>
-
-                        </li>
-
-                        <li class="submenu-item  ">
-                            <a href="component-tooltip.html" class="submenu-link">Tooltip</a>
-
-                        </li>
-
                     </ul>
 
 
@@ -154,42 +81,14 @@
 
                 <li class="sidebar-item  has-sub">
                     <a href="#" class='sidebar-link'>
-                        <i class="bi bi-collection-fill"></i>
-                        <span>Extra Components</span>
+                        <i class="bi bi-file-person"></i>
+                        <span>JobSeekers</span>
                     </a>
 
                     <ul class="submenu ">
-
                         <li class="submenu-item  ">
-                            <a href="extra-component-avatar.html" class="submenu-link">Avatar</a>
-
+                            <a href="#" class="submenu-link">JobSeekers</a>
                         </li>
-
-                        <li class="submenu-item  ">
-                            <a href="extra-component-divider.html" class="submenu-link">Divider</a>
-
-                        </li>
-
-                        <li class="submenu-item  ">
-                            <a href="extra-component-date-picker.html" class="submenu-link">Date Picker</a>
-
-                        </li>
-
-                        <li class="submenu-item  ">
-                            <a href="extra-component-sweetalert.html" class="submenu-link">Sweet Alert</a>
-
-                        </li>
-
-                        <li class="submenu-item  ">
-                            <a href="extra-component-toastify.html" class="submenu-link">Toastify</a>
-
-                        </li>
-
-                        <li class="submenu-item  ">
-                            <a href="extra-component-rating.html" class="submenu-link">Rating</a>
-
-                        </li>
-
                     </ul>
 
 
