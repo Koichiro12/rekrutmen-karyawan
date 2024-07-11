@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Departement;
 use Illuminate\Http\Request;
 
 class DepartemenController extends Controller
@@ -13,6 +14,12 @@ class DepartemenController extends Controller
     public function index()
     {
         //
+        $data = $this->getPageData();
+        $data['page_name'] = 'Departement';
+        $data['page_subname'] = 'Department data will appear here';
+        $data['page_breadcum'] = array_merge($data['page_breadcum'],[['name' => 'Departement','link' => route('departement.index'),'status' => 'active']]);
+        $departement = Departement::latest()->get();
+        return view('pages.admin.departement.index',compact(['data','departement']));
     }
 
     /**

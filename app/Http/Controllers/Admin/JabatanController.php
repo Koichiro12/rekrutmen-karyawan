@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Position;
 use Illuminate\Http\Request;
 
 class JabatanController extends Controller
@@ -13,6 +14,12 @@ class JabatanController extends Controller
     public function index()
     {
         //
+        $data = $this->getPageData();
+        $data['page_name'] = 'Positions';
+        $data['page_subname'] = 'Positions data will appear here';
+        $data['page_breadcum'] = array_merge($data['page_breadcum'],[['name' => 'Positions','link' => route('position.index'),'status' => 'active']]);
+        $position = Position::latest()->get();
+        return view('pages.admin.position.index',compact(['data','position']));
     }
 
     /**

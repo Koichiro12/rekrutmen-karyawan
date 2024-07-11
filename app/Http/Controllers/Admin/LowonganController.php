@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Job;
 use Illuminate\Http\Request;
 
 class LowonganController extends Controller
@@ -13,6 +14,12 @@ class LowonganController extends Controller
     public function index()
     {
         //
+        $data = $this->getPageData();
+        $data['page_name'] = 'Jobs';
+        $data['page_subname'] = 'Jobs data will appear here';
+        $data['page_breadcum'] = array_merge($data['page_breadcum'],[['name' => 'Jobs','link' => route('jobs.index'),'status' => 'active']]);
+        $jobs = Job::latest()->get();
+        return view('pages.admin.jobs.index',compact(['data','jobs']));
     }
 
     /**

@@ -8,7 +8,7 @@ class AppModel extends Model
 {
     protected $fillable = [];
     protected static $_uniqueKey = [];
-    protected static $_primaryKey = '';
+    protected static $_primaryKey = 'id';
     protected $table = '';
 
 

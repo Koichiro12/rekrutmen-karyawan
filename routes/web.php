@@ -3,7 +3,9 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DepartemenController;
 use App\Http\Controllers\Admin\JabatanController;
+use App\Http\Controllers\Admin\JobSeekersController;
 use App\Http\Controllers\Admin\LowonganController;
+use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Auth\ForgetPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -40,4 +42,9 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
     Route::resource('jobs',LowonganController::class);
 
 
+    Route::get('/jobseekers', [JobSeekersController::class, 'index'])->name('jobseekers');
+
+    Route::resource('users',UsersController::class);
+    
+    
 });

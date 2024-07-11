@@ -3,8 +3,8 @@
         <div class="sidebar-header position-relative">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="logo">
-                    <a href="{{route('dashboard')}}"><img src="{{ asset('/') }}assets/compiled/svg/logo.svg" alt="Logo"
-                            srcset=""></a>
+                    <a href="{{ route('dashboard') }}"><img src="{{ asset('/') }}assets/compiled/svg/logo.svg"
+                            alt="Logo" srcset=""></a>
                 </div>
                 <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -56,55 +56,48 @@
                         <span>Profile</span>
                     </a>
                 </li>
-                <li class="sidebar-item has-sub">
+                <li class="sidebar-item {{ url()->current() == route('jobs.index') || url()->current() == route('departement.index') || url()->current() == route('position.index') ? 'active' : '' }} has-sub">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-stack"></i>
                         <span>Master Data</span>
                     </a>
-                    <ul class="submenu ">
-                        <li class="submenu-item  ">
-                            <a href="{{route('departement.index')}}" class="submenu-link">Departement</a>
+                    <ul class="submenu {{ url()->current() == route('jobs.index') || url()->current() == route('departement.index') || url()->current() == route('position.index') ? 'active' : '' }}">
+                        <li class="submenu-item  {{ url()->current() == route('departement.index') ? 'active' : '' }}">
+                            <a href="{{ route('departement.index') }}" class="submenu-link">Departement</a>
                         </li>
 
-                        <li class="submenu-item  ">
-                            <a href="{{route('position.index')}}" class="submenu-link">Position</a>
+                        <li class="submenu-item  {{ url()->current() == route('position.index') ? 'active' : '' }}">
+                            <a href="{{ route('position.index') }}" class="submenu-link">Position</a>
 
                         </li>
 
-                        <li class="submenu-item  ">
-                            <a href="{{route('jobs.index')}}" class="submenu-link">Jobs</a>
+                        <li class="submenu-item  {{ url()->current() == route('jobs.index') ? 'active' : '' }}">
+                            <a href="{{ route('jobs.index') }}" class="submenu-link">Jobs</a>
                         </li>
                     </ul>
-
-
                 </li>
-
-                <li class="sidebar-item  has-sub">
+                <li class="sidebar-item {{ url()->current() == route('jobseekers') ? 'active' : '' }} has-sub">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-file-person"></i>
                         <span>JobSeekers</span>
                     </a>
 
-                    <ul class="submenu ">
-                        <li class="submenu-item  ">
-                            <a href="#" class="submenu-link">JobSeekers</a>
+                    <ul class="submenu {{ url()->current() == route('jobseekers') ? 'active' : '' }}">
+                        <li class="submenu-item {{ url()->current() == route('jobseekers') ? 'active' : '' }} ">
+                            <a href="{{route('jobseekers')}}" class="submenu-link">JobSeekers</a>
                         </li>
                     </ul>
-
-
                 </li>
-
                 <li class="sidebar-title">Lainnya</li>
-
-                <li class="sidebar-item">
-                    <a href="#" class='sidebar-link'>
+                <li class="sidebar-item  {{ url()->current() == route('users.index') ? 'active' : '' }} ">
+                    <a href="{{route('users.index')}}" class='sidebar-link'>
                         <i class="bi bi-person-circle"></i>
                         <span>Users</span>
                     </a>
                 </li>
 
                 <li class="sidebar-item">
-                    <a href="{{route('logout')}}" class='sidebar-link'>
+                    <a href="{{ route('logout') }}" class='sidebar-link'>
                         <i class="bi bi-power"></i>
                         <span>Sign Out</span>
                     </a>

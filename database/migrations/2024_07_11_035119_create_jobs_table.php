@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if(!Schema::hasTable('jobs')){
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
             $table->string('job_name');
@@ -18,7 +19,7 @@ return new class extends Migration
             $table->bigInteger('position_id');
             $table->integer('max_age');
             $table->string('min_education');
-            $table->string('major_education')->unsigned();
+            $table->string('major_education')->nullable();
             $table->string('salary');
             $table->text('job_desc');
             $table->text('job_criteria');
@@ -27,6 +28,7 @@ return new class extends Migration
             $table->date('close_date');
             $table->timestamps();
         });
+    }
     }
 
     /**

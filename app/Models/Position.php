@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Position extends AppModel
 {
     use HasFactory;
+    protected static $_primaryKey = 'id';
+    protected $table = 'positions';
+
+    protected $fillable = [
+        'position',
+        'created_at',
+        'updated_at'
+    ];
 }

@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if(!Schema::hasTable('positions')){
-        Schema::create('positions', function (Blueprint $table) {
+        Schema::create('type_file_requirements', function (Blueprint $table) {
             $table->id();
-            $table->string('position');
             $table->timestamps();
         });
-    }
     }
 
     /**
@@ -25,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('positions');
+        Schema::dropIfExists('type_file_requirements');
     }
 };

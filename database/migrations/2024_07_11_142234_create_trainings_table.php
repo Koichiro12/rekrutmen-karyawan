@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if(!Schema::hasTable('positions')){
-        Schema::create('positions', function (Blueprint $table) {
+        Schema::create('trainings', function (Blueprint $table) {
             $table->id();
-            $table->string('position');
+            $table->bigInteger('user_id');
+            $table->string('training');
+            $table->string('certification');
+            $table->string('organizer');
+            $table->string('year_of_training');
             $table->timestamps();
         });
-    }
     }
 
     /**
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('positions');
+        Schema::dropIfExists('trainings');
     }
 };
