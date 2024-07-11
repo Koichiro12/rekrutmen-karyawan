@@ -8,18 +8,37 @@
                 </div>
                 <h1 class="auth-title">Log in.</h1>
                 <p class="auth-subtitle mb-5">Log in with your data that you entered during registration.</p>
-
+                @if (session()->has('eror'))
+                    <div class="alert alert-danger">
+                        {{session('eror')}}
+                    </div>
+                @endif
+                @if (session()->has('sukses'))
+                <div class="alert alert-success">
+                    {{session('sukses')}}
+                </div>
+            @endif
                 <form action="{{route('auth')}}" method="POST">
                     @method('POST')
                     @csrf
                     <div class="form-group position-relative has-icon-left mb-4">
-                        <input type="email" class="form-control form-control-xl" placeholder="Email">
+                        <input type="email" class="form-control form-control-xl {{ $errors->first('email') != null ? 'is-invalid' : '' }}" value="{{old('email')}}" name="email" id="email" placeholder="Email">
+                        @if ($errors->first('email') != null)
+                        <div class="invalid-feedback">
+                            {{$errors->first('email')}}
+                        </div>
+                        @endif
                         <div class="form-control-icon">
                             <i class="bi bi-person"></i>
                         </div>
                     </div>
                     <div class="form-group position-relative has-icon-left mb-4">
-                        <input type="password" class="form-control form-control-xl" placeholder="Password">
+                        <input type="password" class="form-control form-control-xl {{ $errors->first('password') != null ? 'is-invalid' : '' }}" name="password" id="password" placeholder="Password">
+                        @if ($errors->first('password') != null)
+                        <div class="invalid-feedback">
+                            {{$errors->first('password')}}
+                        </div>
+                        @endif
                         <div class="form-control-icon">
                             <i class="bi bi-shield-lock"></i>
                         </div>

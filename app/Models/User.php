@@ -12,15 +12,20 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $_primaryKey = 'id';
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
+        'user_image',
+        'user_phone',
+        'username',
         'name',
         'email',
         'password',
+        'role'
     ];
 
     /**
@@ -42,4 +47,22 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+
+    public static function insertData($request, $exception = []){
+        $exception = array_merge($exception, ['_token', '_method']);
+        $data = $request->except($exception);
+        $data['created_at'] = date('Y-m-d H:i:s');
+        if(!isset($data['role'])) $data['role'] = 'User'; 
+        if(!isset($data['user_image'])) $data['user_image'] = '-'; 
+        if(!isset($data['user_phone'])) $data['user_phone'] = '-'; 
+        return self::insert($data);
+    }
+    public static function updateData($id,$request,$exception = []){
+        $exception = array_merge($exception, ['_token', '_method']);
+        $data = $request->except($exception);
+        $data['updated_at'] = date('Y-m-d H:i:s');
+        return self::where('id',$id)->update($data);
+    }
+
 }

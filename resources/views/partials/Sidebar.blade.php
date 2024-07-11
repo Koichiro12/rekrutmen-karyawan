@@ -205,13 +205,11 @@
                 </li>
 
                 <li class="sidebar-item">
-                    <a href="form-layout.html" class='sidebar-link'>
+                    <a href="{{route('logout')}}" class='sidebar-link'>
                         <i class="bi bi-power"></i>
                         <span>Sign Out</span>
                     </a>
                 </li>
-
-
             </ul>
         </div>
     </div>
