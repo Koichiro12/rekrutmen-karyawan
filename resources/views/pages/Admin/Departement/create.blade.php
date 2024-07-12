@@ -30,7 +30,7 @@
                                 <label for="departement">Departement</label>
                                 <input type="text" name="departement" id="departement"
                                     class="form-control {{ $errors->first('departement') != null ? 'is-invalid' : '' }}"
-                                    placeholder="Departement Name" required>
+                                    placeholder="Departement Name" value="{{old('departement')}}" required>
                                 @if ($errors->first('departement') != null)
                                     <div class="invalid-feedback">
                                         {{ $errors->first('departement') }}

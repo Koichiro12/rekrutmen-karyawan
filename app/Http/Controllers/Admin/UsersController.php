@@ -28,7 +28,13 @@ class UsersController extends Controller
     public function create()
     {
         //
+        $data = $this->getPageData();
+        $data['page_name'] = 'Create User';
+        $data['page_subname'] = 'Create User here';
+        $data['page_breadcum'] = array_merge($data['page_breadcum'],[['name' => 'Users','link' => route('users.index'),'status' => ''],['name' => 'Create User','link' => route('users.create'),'status' => 'active']]);
+        return view('pages.admin.users.create',compact(['data']));
     }
+    
 
     /**
      * Store a newly created resource in storage.
@@ -52,6 +58,12 @@ class UsersController extends Controller
     public function edit(string $id)
     {
         //
+        $data = $this->getPageData();
+        $data['page_name'] = 'Create User';
+        $data['page_subname'] = 'Create User here';
+        $data['page_breadcum'] = array_merge($data['page_breadcum'],[['name' => 'Users','link' => route('users.index'),'status' => ''],['name' => 'Create User','link' => route('users.create'),'status' => 'active']]);
+        $users = User::findOrFail($id);
+        return view('pages.admin.users.edit',compact(['data'.'users']));
     }
 
     /**

@@ -16,4 +16,5 @@ class Position extends AppModel
         'created_at',
         'updated_at'
     ];
+  
 }

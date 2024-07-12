@@ -9,12 +9,17 @@ use Validator;
 
 class DepartemenController extends Controller
 {
+
+    public function __construct(){
+       
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         //
+        $this->RolesAllowed(['Admin']);
         $data = $this->getPageData();
         $data['page_name'] = 'Departement';
         $data['page_subname'] = 'Department data will appear here';
@@ -29,6 +34,7 @@ class DepartemenController extends Controller
     public function create()
     {
         //
+        $this->RolesAllowed(['Admin']);
         $data = $this->getPageData();
         $data['page_name'] = 'Create Departement';
         $data['page_subname'] = 'Create Department here';
@@ -42,6 +48,7 @@ class DepartemenController extends Controller
     public function store(Request $request)
     {
         //
+     
 
         $validate = Validator::make($request->all(),[
             'departement' => ['required']
@@ -66,6 +73,7 @@ class DepartemenController extends Controller
     public function edit(string $id)
     {
         //
+        $this->RolesAllowed(['Admin']);
         $data = $this->getPageData();
         $data['page_name'] = 'Edit Departement';
         $data['page_subname'] = 'Edit Department here';

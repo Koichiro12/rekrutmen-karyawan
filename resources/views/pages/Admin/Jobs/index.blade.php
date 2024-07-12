@@ -31,7 +31,41 @@
                                     @foreach ($jobs as $item)
                                         <tr>
                                             <td>{{$loop->index + 1}}</td>
-                                            <td>{{$item->name}}</td>
+                                            <td>{{$item->job_name}}</td>
+                                            <td>Departement : {{$item->departement}} <br>
+                                                Position : {{$item->position}} <br>
+                                                Min Education : {{$item->min_education}} <br>
+                                                Major Education : {{$item->major_education}}
+                                                Max Age : {{$item->max_age}} <br>
+                                                 </td>
+                                            <td>{{date_format(date_create($item->open_date),'d M Y')}} s/d {{date_format(date_create($item->close_date),'d M Y')}}</td>
+                                            <td>
+                                                @switch($item->status)
+                                                    @case(0)
+                                                        <span class="badge bg-danger">Closed</span>
+                                                        @break
+                                                    @case(1)
+                                                    <span class="badge bg-success">Open</span>
+                                                        @break
+                                                    @default
+                                                        
+                                                @endswitch
+                                            </td>
+                                            <td>
+                                                <a href="#" class="btn btn-sm btn-warning"><i class="bi bi-eye"></i> Detail</a>
+                                            </td>
+                                            <td>
+                                                <a href="#" class="btn btn-sm btn-warning"><i class="bi bi-eye"></i> Detail</a>
+                                            </td>
+                                            <td>
+                                                <form action="{{ route('jobs.destroy', $item->id) }}" method="post">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                    <a href="{{ route('jobs.edit', $item->id) }}"
+                                                        class="btn btn-sm btn-warning">Edit</a>
+                                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                                </form>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

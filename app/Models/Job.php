@@ -27,4 +27,6 @@ class Job extends AppModel
         'created_at',
         'updated_at'
     ];
+
+  
 }

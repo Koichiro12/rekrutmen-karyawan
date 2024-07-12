@@ -28,7 +28,7 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="position">Position</label>
-                                <input type="text" name="position" id="position" class="form-control  {{ $errors->first('position') != null ? 'is-invalid' : '' }}" placeholder="Position Name" required>
+                                <input type="text" name="position" id="position" class="form-control  {{ $errors->first('position') != null ? 'is-invalid' : '' }}" value="{{old('position')}}" placeholder="Position Name" required>
                                 @if ($errors->first('position') != null)
                                 <div class="invalid-feedback">
                                     {{ $errors->first('position') }}
