@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Position;
 use Illuminate\Http\Request;
+use Validator;
 
 class JabatanController extends Controller
 {
@@ -28,6 +29,12 @@ class JabatanController extends Controller
     public function create()
     {
         //
+        $data = $this->getPageData();
+        $data['page_name'] = 'Create Position';
+        $data['page_subname'] = 'Create Position here';
+        $data['page_breadcum'] = array_merge($data['page_breadcum'],[['name' => 'Positions','link' => route('position.index'),'status' => ''],['name' => 'Create Position','link' => route('position.create'),'status' => 'active']]);
+       
+        return view('pages.admin.position.create',compact(['data']));
     }
 
     /**
@@ -36,6 +43,13 @@ class JabatanController extends Controller
     public function store(Request $request)
     {
         //
+        $validate = Validator::make($request->all(),[
+            'position' => ['required']
+        ]);
+        if($validate->fails()){
+            return redirect()->back()->withErrors($validate)->withInput();
+        }
+        return Position::insertData($request) ? redirect()->route('position.index')->with('sukses','Create Position Successfully') : redirect()->back()->with('eror','Oops,Something Went Wrong, Please Try again');
     }
 
     /**
@@ -52,6 +66,12 @@ class JabatanController extends Controller
     public function edit(string $id)
     {
         //
+        $data = $this->getPageData();
+        $data['page_name'] = 'Edit Position';
+        $data['page_subname'] = 'Edit Position here';
+        $data['page_breadcum'] = array_merge($data['page_breadcum'],[['name' => 'Positions','link' => route('position.index'),'status' => ''],['name' => 'Edit Position','link' => route('position.edit',$id),'status' => 'active']]);
+        $position = Position::findOrFail($id);
+        return view('pages.admin.position.edit',compact(['data','position']));
     }
 
     /**
@@ -60,6 +80,13 @@ class JabatanController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $validate = Validator::make($request->all(),[
+            'position' => ['required']
+        ]);
+        if($validate->fails()){
+            return redirect()->back()->withErrors($validate)->withInput();
+        }
+        return Position::updateData($id,$request) ? redirect()->route('position.index')->with('sukses','Update Position Successfully') : redirect()->back()->with('eror','Oops,Something Went Wrong, Please Try again');
     }
 
     /**
@@ -68,5 +95,8 @@ class JabatanController extends Controller
     public function destroy(string $id)
     {
         //
+        return Position::deleteData($id) ? 
+        redirect()->route('position.index')->with('sukses','Delete Position Successfully') :
+        redirect()->back()->with('eror','Oops,Something Went Wrong, Please Try again');
     }
 }

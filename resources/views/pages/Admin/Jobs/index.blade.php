@@ -9,7 +9,7 @@
                             Jobs
                         </h4>
                         <div class="card-tools">
-                            <a href="#" name="create" id="create" class="btn btn-sm btn-primary">Create</a>
+                            <a href="{{route('jobs.create')}}" name="create" id="create" class="btn btn-sm btn-primary">Create</a>
                         </div>
                     </div>
                     <div class="card-body">
@@ -18,10 +18,23 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
+                                        <th>Name</th>
+                                        <th>Requirement</th>
+                                        <th>Period</th>
+                                        <th>Status</th>
+                                        <th>Soal</th>
+                                        <th>Psikotes</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-                                
+                                <tbody>
+                                    @foreach ($jobs as $item)
+                                        <tr>
+                                            <td>{{$loop->index + 1}}</td>
+                                            <td>{{$item->name}}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
                             </table>
                         </div>
                     </div>

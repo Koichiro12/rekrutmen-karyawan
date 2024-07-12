@@ -63,7 +63,6 @@ class User extends Authenticatable
     public static function updateData($id,$request,$exception = []){
         $exception = array_merge($exception, ['_token', '_method']);
         $data = $request->except($exception);
-        $data['password'] = Hash::make($data['password']);
         $data['updated_at'] = date('Y-m-d H:i:s');
         return self::where('id',$id)->update($data);
     }

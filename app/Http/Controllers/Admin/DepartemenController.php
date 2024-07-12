@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Departement;
 use Illuminate\Http\Request;
+use Validator;
 
 class DepartemenController extends Controller
 {
@@ -28,6 +29,11 @@ class DepartemenController extends Controller
     public function create()
     {
         //
+        $data = $this->getPageData();
+        $data['page_name'] = 'Create Departement';
+        $data['page_subname'] = 'Create Department here';
+        $data['page_breadcum'] = array_merge($data['page_breadcum'],[['name' => 'Departement','link' => route('departement.index'),'status' => ''],['name' => 'Create Departement','link' => route('departement.create'),'status' => 'active']]);
+        return view('pages.admin.departement.create',compact(['data']));
     }
 
     /**
@@ -36,6 +42,14 @@ class DepartemenController extends Controller
     public function store(Request $request)
     {
         //
+
+        $validate = Validator::make($request->all(),[
+            'departement' => ['required']
+        ]);
+        if($validate->fails()){
+            return redirect()->back()->withErrors($validate)->withInput();
+        }
+        return Departement::insertData($request) ? redirect()->route('departement.index')->with('sukses','Create Departement Successfully') : redirect()->back()->with('eror','Oops,Something Went Wrong, Please Try again');
     }
 
     /**
@@ -52,6 +66,12 @@ class DepartemenController extends Controller
     public function edit(string $id)
     {
         //
+        $data = $this->getPageData();
+        $data['page_name'] = 'Edit Departement';
+        $data['page_subname'] = 'Edit Department here';
+        $data['page_breadcum'] = array_merge($data['page_breadcum'],[['name' => 'Departement','link' => route('departement.index'),'status' => ''],['name' => 'Edit Departement','link' => route('departement.edit',$id),'status' => 'active']]);
+        $departement = Departement::findOrFail($id);
+        return view('pages.admin.departement.edit',compact(['data','departement']));
     }
 
     /**
@@ -60,6 +80,14 @@ class DepartemenController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $validate = Validator::make($request->all(),[
+            'departement' => ['required']
+        ]);
+        if($validate->fails()){
+            return redirect()->back()->withErrors($validate)->withInput();
+        }
+        return Departement::updateData($id,$request) ? redirect()->route('departement.index')->with('sukses','Update Departement Successfully') : redirect()->back()->with('eror','Oops,Something Went Wrong, Please Try again');
+        
     }
 
     /**
@@ -68,5 +96,8 @@ class DepartemenController extends Controller
     public function destroy(string $id)
     {
         //
+        return Departement::deleteData($id) ? 
+        redirect()->route('departement.index')->with('sukses','Delete Departement Successfully') :
+        redirect()->back()->with('eror','Oops,Something Went Wrong, Please Try again');
     }
 }

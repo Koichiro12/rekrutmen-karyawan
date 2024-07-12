@@ -19,7 +19,7 @@ class LowonganController extends Controller
         $data['page_subname'] = 'Jobs data will appear here';
         $data['page_breadcum'] = array_merge($data['page_breadcum'],[['name' => 'Jobs','link' => route('jobs.index'),'status' => 'active']]);
         $jobs = Job::latest()->get();
-        return view('pages.admin.jobs.index',compact(['data','jobs']));
+        return view('pages.admin.jobs.index',compact(['data']));
     }
 
     /**

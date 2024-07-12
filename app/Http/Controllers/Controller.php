@@ -11,7 +11,11 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
-    
+    protected $defaultUploadFileDir = 'uploads';
+
+    public function __construct(){
+        if(!is_dir($this->defaultUploadFileDir)) mkdir($this->defaultUploadFileDir);
+    }
     public function getPageData(){
         $data = [];
         $data['page_name'] = 'Dashboard';

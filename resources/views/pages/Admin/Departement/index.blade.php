@@ -3,13 +3,23 @@
     <section class="section">
         <div class="row">
             <div class="col-12 col-xl-12">
+                @if (session()->has('eror'))
+                <div class="alert alert-danger">
+                    {{session('eror')}}
+                </div>
+            @endif
+            @if (session()->has('sukses'))
+            <div class="alert alert-success">
+                {{session('sukses')}}
+            </div>
+        @endif
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">
                             Departement
                         </h4>
                         <div class="card-tools">
-                            <a href="#" name="create" id="create" class="btn btn-sm btn-primary">Create</a>
+                            <a href="{{route('departement.create')}}" name="create" id="create" class="btn btn-sm btn-primary">Create</a>
                         </div>
                     </div>
                     <div class="card-body">
@@ -31,7 +41,7 @@
                                                 <form action="{{route('departement.destroy',$item->id)}}" method="post">
                                                     @method('DELETE')
                                                     @csrf
-                                                    <a href="#" class="btn btn-sm btn-warning">Edit</a>
+                                                    <a href="{{route('departement.edit',$item->id)}}" class="btn btn-sm btn-warning">Edit</a>
                                                     <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                                                 </form>
                                             </td>
