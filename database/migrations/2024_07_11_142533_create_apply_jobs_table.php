@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('apply_jobs', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('user_id');
+            $table->bigInteger('jobseeker_id');
+            $table->bigInteger('job_id');
+            $table->string('test_result');
+            $table->string('psikotes_result');
+            $table->string('status_apply');
+            $table->date('date_apply');
             $table->timestamps();
         });
     }

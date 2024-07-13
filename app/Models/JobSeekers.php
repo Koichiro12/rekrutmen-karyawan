@@ -14,6 +14,7 @@ class JobSeekers extends Model
     protected $fillable = [
         'user_id',
         'jobseeker_image',
+        'jobseeker_cv',
         'nik',
         'name',
         'date_birth',
@@ -28,6 +29,8 @@ class JobSeekers extends Model
         'citizen',
         'relegion',
         'npwp',
+        'sim',
+        'sim_number',
         'created_at',
         'updated_at'
     ];

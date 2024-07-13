@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('user_id');
             $table->string('jobseeker_image');
+            $table->string('jobseeker_cv');
             $table->string('nik');
             $table->string('name');
             $table->date('date_birth');
@@ -30,6 +31,8 @@ return new class extends Migration
             $table->string('citizen');
             $table->string('relegion');
             $table->string('npwp')->nullable();
+            $table->string('sim')->nullable();
+            $table->string('sim_number')->nullable();
             $table->timestamps();
         });
     }

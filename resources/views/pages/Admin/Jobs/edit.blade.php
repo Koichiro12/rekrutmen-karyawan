@@ -98,6 +98,15 @@
                                             class="form-control {{ $errors->first('min_education') != null ? 'is-invalid' : '' }}"
                                             required>
                                             <option value="">-- Select Educations --</option>
+                                            <option value="SD" {{$job->min_education == 'SD' ? 'selected' : ''}}>SD</option>
+                                            <option value="SMP" {{$job->min_education == 'SMP' ? 'selected' : ''}}>SMP</option>
+                                            <option value="SMA / SMK Sederajat" {{$job->min_education == 'SMA / SMK Sederajat' ? 'selected' : ''}}>SMA / SMK Sederajat</option>
+                                            <option value="D1" {{$job->min_education == 'D1' ? 'selected' : ''}}>D1</option>
+                                            <option value="D2" {{$job->min_education == 'D2' ? 'selected' : ''}}>D2</option>
+                                            <option value="D3" {{$job->min_education == 'D3' ? 'selected' : ''}}>D3</option>
+                                            <option value="D4 / S1" {{$job->min_education == 'D4 / S1' ? 'selected' : ''}}>D4 / S1</option>
+                                            <option value="S2" {{$job->min_education == 'S2' ? 'selected' : ''}}>S2</option>
+                                            <option value="S3" {{$job->min_education == 'S3' ? 'selected' : ''}}>S3</option>
                                         </select>
                                         @if ($errors->first('min_education') != null)
                                             <div class="invalid-feedback">

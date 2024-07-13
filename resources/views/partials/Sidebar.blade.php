@@ -56,48 +56,101 @@
                         <span>Profile</span>
                     </a>
                 </li>
-                <li class="sidebar-item {{ url()->current() == route('jobs.index') || url()->current() == route('departement.index') || url()->current() == route('position.index') ? 'active' : '' }} has-sub">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-stack"></i>
-                        <span>Master Data</span>
+                @if (auth()->user()->role == "Admin")
+                    <li
+                        class="sidebar-item {{ url()->current() == route('jobs.index') || url()->current() == route('departement.index') || url()->current() == route('position.index') ? 'active' : '' }} has-sub">
+                        <a href="#" class='sidebar-link'>
+                            <i class="bi bi-stack"></i>
+                            <span>Master Data</span>
+                        </a>
+                        <ul
+                            class="submenu {{ url()->current() == route('jobs.index') || url()->current() == route('departement.index') || url()->current() == route('position.index') ? 'active' : '' }}">
+                            <li
+                                class="submenu-item  {{ url()->current() == route('departement.index') ? 'active' : '' }}">
+                                <a href="{{ route('departement.index') }}" class="submenu-link">Departement</a>
+                            </li>
+
+                            <li
+                                class="submenu-item  {{ url()->current() == route('position.index') ? 'active' : '' }}">
+                                <a href="{{ route('position.index') }}" class="submenu-link">Position</a>
+
+                            </li>
+
+                            <li class="submenu-item  {{ url()->current() == route('jobs.index') ? 'active' : '' }}">
+                                <a href="{{ route('jobs.index') }}" class="submenu-link">Jobs</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-item {{ url()->current() == route('jobseekers') ? 'active' : '' }} has-sub">
+                        <a href="#" class='sidebar-link'>
+                            <i class="bi bi-file-person"></i>
+                            <span>JobSeekers</span>
+                        </a>
+
+                        <ul class="submenu {{ url()->current() == route('jobseekers') ? 'active' : '' }}">
+                            <li class="submenu-item {{ url()->current() == route('jobseekers') ? 'active' : '' }} ">
+                                <a href="{{ route('jobseekers') }}" class="submenu-link">JobSeekers</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-title">Another Menu</li>
+                    <li class="sidebar-item  {{ url()->current() == route('users.index') ? 'active' : '' }} ">
+                        <a href="{{ route('users.index') }}" class='sidebar-link'>
+                            <i class="bi bi-person-circle"></i>
+                            <span>Users</span>
+                        </a>
+                    </li>
+                @endif
+                @if (auth()->user()->role == "User")
+                <li class="sidebar-item {{ url()->current() == route('personal_data') ? 'active' : '' }}">
+                    <a href="{{ route('personal_data') }}" class='sidebar-link'>
+                        <i class="bi bi-person"></i>
+                        <span>Personal Data</span>
                     </a>
-                    <ul class="submenu {{ url()->current() == route('jobs.index') || url()->current() == route('departement.index') || url()->current() == route('position.index') ? 'active' : '' }}">
-                        <li class="submenu-item  {{ url()->current() == route('departement.index') ? 'active' : '' }}">
-                            <a href="{{ route('departement.index') }}" class="submenu-link">Departement</a>
-                        </li>
-
-                        <li class="submenu-item  {{ url()->current() == route('position.index') ? 'active' : '' }}">
-                            <a href="{{ route('position.index') }}" class="submenu-link">Position</a>
-
-                        </li>
-
-                        <li class="submenu-item  {{ url()->current() == route('jobs.index') ? 'active' : '' }}">
-                            <a href="{{ route('jobs.index') }}" class="submenu-link">Jobs</a>
-                        </li>
-                    </ul>
                 </li>
-                <li class="sidebar-item {{ url()->current() == route('jobseekers') ? 'active' : '' }} has-sub">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-file-person"></i>
-                        <span>JobSeekers</span>
-                    </a>
-
-                    <ul class="submenu {{ url()->current() == route('jobseekers') ? 'active' : '' }}">
-                        <li class="submenu-item {{ url()->current() == route('jobseekers') ? 'active' : '' }} ">
-                            <a href="{{route('jobseekers')}}" class="submenu-link">JobSeekers</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="sidebar-title">Lainnya</li>
-                <li class="sidebar-item  {{ url()->current() == route('users.index') ? 'active' : '' }} ">
-                    <a href="{{route('users.index')}}" class='sidebar-link'>
-                        <i class="bi bi-person-circle"></i>
-                        <span>Users</span>
+                <li class="sidebar-item {{ url()->current() == route('educations.index') ? 'active' : '' }}">
+                    <a href="{{ route('educations.index') }}" class='sidebar-link'>
+                        <i class="bi bi-bank"></i>
+                        <span>Educations</span>
                     </a>
                 </li>
+                <li class="sidebar-item {{ url()->current() == route('experiences.index') ? 'active' : '' }}">
+                    <a href="{{ route('experiences.index') }}" class='sidebar-link'>
+                        <i class="bi bi-briefcase"></i>
+                        <span>Experiences</span>
+                    </a>
+                </li>
+                <li class="sidebar-item {{ url()->current() == route('skills.index') ? 'active' : '' }}">
+                    <a href="{{ route('skills.index') }}" class='sidebar-link'>
+                        <i class="bi bi-lightning-fill"></i>
+                        <span>Skills</span>
+                    </a>
+                </li>
+                <li class="sidebar-item {{ url()->current() == route('trainings.index') ? 'active' : '' }}">
+                    <a href="{{ route('trainings.index') }}" class='sidebar-link'>
+                        <i class="bi bi-person-rolodex"></i>
+                        <span>Training</span>
+                    </a>
+                </li>
+                <li class="sidebar-title">Jobseekers</li>
+                <li class="sidebar-item {{ url()->current() == route('search_job') ? 'active' : '' }}">
+                    <a href="{{ route('search_job') }}" class='sidebar-link'>
+                        <i class="bi bi-search"></i>
+                        <span>Search Jobs</span>
+                    </a>
+                </li>
+                <li class="sidebar-item {{ url()->current() == route('apply_job') ? 'active' : '' }}">
+                    <a href="{{ route('apply_job') }}" class='sidebar-link'>
+                        <i class="bi bi-file-earmark-person"></i>
+                        <span>My Apply Jobs</span>
+                    </a>
+                </li>
+                <li class="sidebar-title">Another Menu</li>
+                @endif
+
 
                 <li class="sidebar-item">
-                    <a href="{{ route('logout') }}" class='sidebar-link'>
+                    <a href="{{ route('logout') }}" class='sidebar-link a-confirm'>
                         <i class="bi bi-power"></i>
                         <span>Sign Out</span>
                     </a>

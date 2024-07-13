@@ -22,7 +22,7 @@
                                         <th>Requirement</th>
                                         <th>Period</th>
                                         <th>Status</th>
-                                        <th>Soal</th>
+                                        <th>Test</th>
                                         <th>Psikotes</th>
                                         <th>Action</th>
                                     </tr>

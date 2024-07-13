@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('language_skills', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('user_id');
+            $table->string('language_skill');
+            $table->string('language_skill_level');
             $table->timestamps();
         });
     }

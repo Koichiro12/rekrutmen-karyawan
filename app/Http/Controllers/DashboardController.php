@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -49,7 +49,7 @@ class DashboardController extends Controller
         if(!isset($request['foto']) || $request['foto'] == null){
             $request['user_image'] = $oldData->user_image;   
         }
-        if(!isset($request['password']) || $request['password'] == null){
+        if($request['password'] != '' || $request['password'] == null){
             $request['password'] = $oldData->password;   
         }
         return User::updateData($id,$request,['foto']) ? redirect()->back()->with('sukses',"Update Profile Successfully") : redirect()->back()->with('eror',"Update Profile Failed, Please Try Again") ;

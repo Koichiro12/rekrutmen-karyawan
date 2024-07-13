@@ -14,6 +14,15 @@ return new class extends Migration
         Schema::create('experiences', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id');
+            $table->string('last_job_departement');
+            $table->string('company_name');
+            $table->string('last_job_position');
+            $table->string('start_job');
+            $table->string('end_job');
+            $table->string('salary');
+            $table->string('intensive_pay');
+            $table->string('last_job_facility');
+            $table->text('reason_stop_working');
             $table->timestamps();
         });
     }
