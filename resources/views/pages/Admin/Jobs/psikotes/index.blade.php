@@ -50,7 +50,7 @@
                                             </ul>
                                         </td>
                                         <td>
-                                            <form action="#" method="post">
+                                            <form action="{{route('delete_psikotest',$item->id)}}" method="post">
                                                 @method('DELETE')
                                                 @csrf
                                                 <a href="#" data-bs-toggle="modal" data-bs-target="#modalEdit-{{$item->id}}" class="btn btn-sm btn-warning">Edit</a>
@@ -76,12 +76,20 @@
                             <i data-feather="x"></i>
                         </button>
                     </div>
-                    <form action="#">
+                    <form action="{{route('store_psikotest')}}" method="POST" enctype="multipart/form-data">
+                        @method('POST')
+                        @csrf
                         <div class="modal-body">
+                            <input type="hidden" name="jobs_id" id="jobs_id" value="{{$id}}">
                             <div class="form-group">
                                 <label for="question">Question</label>
-                                <input type="text" name="question" id="question" class="form-control form-input"
+                                <input type="text" name="question" value="{{old('question')}}" id="question" class="form-control form-input"
                                     placeholder="Questions" required>
+                                    @if ($errors->first('question') != null)
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('question') }}
+                                    </div>
+                                @endif
                             </div>
                             <div class="form-group">
                                 <div class="row">
@@ -89,8 +97,13 @@
                                         <h5>A.</h5>
                                     </div>
                                     <div class="col-md-11">
-                                        <input type="text" name="option_a" id="option_a" class="form-control form-input"
+                                        <input type="text" name="option_a" value="{{old('option_a')}}" id="option_a" class="form-control form-input"
                                             placeholder="Option Answer A" required>
+                                            @if ($errors->first('option_a') != null)
+                                            <div class="invalid-feedback">
+                                                {{ $errors->first('option_a') }}
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -100,8 +113,13 @@
                                         <h5>B.</h5>
                                     </div>
                                     <div class="col-md-11">
-                                        <input type="text" name="option_b" id="option_b" class="form-control form-input"
+                                        <input type="text" name="option_b" value="{{old('option_b')}}" id="option_b" class="form-control form-input"
                                             placeholder="Option Answer B" required>
+                                            @if ($errors->first('option_b') != null)
+                                            <div class="invalid-feedback">
+                                                {{ $errors->first('option_b') }}
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -111,8 +129,13 @@
                                         <h5>C.</h5>
                                     </div>
                                     <div class="col-md-11">
-                                        <input type="text" name="option_c" id="option_c" class="form-control form-input"
+                                        <input type="text" name="option_c" value="{{old('option_c')}}" id="option_c" class="form-control form-input"
                                             placeholder="Option Answer C" required>
+                                            @if ($errors->first('option_c') != null)
+                                            <div class="invalid-feedback">
+                                                {{ $errors->first('option_c') }}
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -122,8 +145,13 @@
                                         <h5>D.</h5>
                                     </div>
                                     <div class="col-md-11">
-                                        <input type="text" name="option_D" id="option_D" class="form-control form-input"
+                                        <input type="text" name="option_d" value="{{old('option_d')}}" id="option_d" class="form-control form-input"
                                             placeholder="Option Answer D" required>
+                                            @if ($errors->first('option_d') != null)
+                                            <div class="invalid-feedback">
+                                                {{ $errors->first('option_d') }}
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -131,11 +159,16 @@
                                 <label for="answer">Answer</label>
                                 <select name="answer" id="answer" class="form-control form-input" required>
                                     <option value="">-- Choose Option --</option>
-                                    <option value="A">A</option>
-                                    <option value="B">B</option>
-                                    <option value="C">C</option>
-                                    <option value="D">D.</option>
+                                    <option value="A" {{old('answer') != null && old('answer') == 'A' ? 'selected' : ''}}>A</option>
+                                    <option value="B" {{old('answer') != null && old('answer') == 'B' ? 'selected' : ''}}>B</option>
+                                    <option value="C" {{old('answer') != null && old('answer') == 'C' ? 'selected' : ''}}>C</option>
+                                    <option value="D" {{old('answer') != null && old('answer') == 'D' ? 'selected' : ''}}>D.</option>
                                 </select>
+                                @if ($errors->first('answer') != null)
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('answer') }}
+                                </div>
+                            @endif
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -161,9 +194,12 @@
                                 <i data-feather="x"></i>
                             </button>
                         </div>
-                        <form action="#">
+                        <form action="{{route('update_psikotest',$item->id)}}" method="POST" enctype="multipart/form-data">
+                            @method('PUT')
+                            @csrf
                             <div class="modal-body">
                                 <div class="form-group">
+                                    <input type="hidden" name="jobs_id" id="jobs_id" value="{{$id}}">
                                     <label for="question">Question</label>
                                     <input type="text" name="question" value="{{$item->question}}" id="question" class="form-control form-input"
                                         placeholder="Questions" required>

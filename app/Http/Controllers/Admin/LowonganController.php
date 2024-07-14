@@ -195,15 +195,48 @@ class LowonganController extends Controller
         $data['page_breadcum'] = array_merge($data['page_breadcum'],[['name' => 'Jobs','link' => route('jobs.index'),'status' => ''],['name' => 'Test Job','link' => route('view_psikotest',$id),'status' => 'active']]);
         $job = Job::join('departements','jobs.departement_id','=','departements.id')->join('positions','jobs.position_id','=','positions.id')->where('jobs.id','=',$id)->get(['jobs.*','positions.position','departements.departement']);
         $psikotest = Psikotes::where('jobs_id','=',$id)->get();
-        return view('pages.admin.jobs.psikotes.index',compact(['data','job','psikotest']));
+        return view('pages.admin.jobs.psikotes.index',compact(['data','job','psikotest','id']));
     }
     public function store_psikotest(Request $request){
+      
+        $validate = Validator::make($request->all(),[
+            'question' => ['required'],
+            'jobs_id' => ['required'],
+            'option_a' => ['required'],
+            'option_b' => ['required'],
+            'option_c' => ['required'],
+            'option_d' => ['required'],
+            'answer' => ['required'],
+        ]);
+       
+        if($validate->fails()){
+            return redirect()->back()->withErrors($validate)->withInput();
+        }
+        return Psikotes::insertData($request) ? redirect()->back()->with('sukses','Create Psikotest Successfully') : redirect()->back()->with('eror','Oops,Something Went Wrong, Please Try again');
+   
 
     }
     public function update_psikotest(Request $request,string $id){
+        $validate = Validator::make($request->all(),[
+            'question' => ['required'],
+            'jobs_id' => ['required'],
+            'option_a' => ['required'],
+            'option_b' => ['required'],
+            'option_c' => ['required'],
+            'option_d' => ['required'],
+            'answer' => ['required'],
+        ]);
+       
+        if($validate->fails()){
+            return redirect()->back()->withErrors($validate)->withInput();
+        }
+        return Psikotes::updateData($id,$request) ? redirect()->back()->with('sukses','Update Psikotest Successfully') : redirect()->back()->with('eror','Oops,Something Went Wrong, Please Try again');
+   
 
     }
     public function destroy_psikotest($id){
-        
+        return Psikotes::deleteData($id) ? 
+        redirect()->back()->with('sukses','Delete Psikotest Successfully') :
+        redirect()->back()->with('eror','Oops,Something Went Wrong, Please Try again');
     }
 }
