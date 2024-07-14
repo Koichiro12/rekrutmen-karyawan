@@ -3,6 +3,16 @@
     <section class="section">
         <div class="row">
             <div class="col-12 col-xl-12">
+                @if (session()->has('eror'))
+                <div class="alert alert-danger">
+                    {{ session('eror') }}
+                </div>
+            @endif
+            @if (session()->has('sukses'))
+                <div class="alert alert-success">
+                    {{ session('sukses') }}
+                </div>
+            @endif
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">
@@ -35,7 +45,7 @@
                                             <td>Departement : {{$item->departement}} <br>
                                                 Position : {{$item->position}} <br>
                                                 Min Education : {{$item->min_education}} <br>
-                                                Major Education : {{$item->major_education}}
+                                                Major Education : {{$item->major_education}} <br>
                                                 Max Age : {{$item->max_age}} <br>
                                                  </td>
                                             <td>{{date_format(date_create($item->open_date),'d M Y')}} s/d {{date_format(date_create($item->close_date),'d M Y')}}</td>
@@ -52,10 +62,10 @@
                                                 @endswitch
                                             </td>
                                             <td>
-                                                <a href="#" class="btn btn-sm btn-warning"><i class="bi bi-eye"></i> Detail</a>
+                                                <a href="{{route('view_test',$item->id)}}" class="btn btn-sm btn-info"><i class="bi bi-eye"></i> Detail</a>
                                             </td>
                                             <td>
-                                                <a href="#" class="btn btn-sm btn-warning"><i class="bi bi-eye"></i> Detail</a>
+                                                <a href="{{route('view_psikotest',$item->id)}}" class="btn btn-sm btn-info"><i class="bi bi-eye"></i> Detail</a>
                                             </td>
                                             <td>
                                                 <form action="{{ route('jobs.destroy', $item->id) }}" method="post">
@@ -63,7 +73,7 @@
                                                     @csrf
                                                     <a href="{{ route('jobs.edit', $item->id) }}"
                                                         class="btn btn-sm btn-warning">Edit</a>
-                                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                                    <button type="submit" class="btn btn-sm btn-danger form-confirm">Delete</button>
                                                 </form>
                                             </td>
                                         </tr>

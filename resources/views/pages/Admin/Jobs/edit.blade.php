@@ -23,7 +23,7 @@
                         </div>
                     </div>
                     <form action="{{ route('jobs.update',$job->id) }}" method="POST" enctype="multipart/form-data">
-                        @method('POST')
+                        @method('PUT')
                         @csrf
                         <div class="card-body">
                             <div class="form-group">

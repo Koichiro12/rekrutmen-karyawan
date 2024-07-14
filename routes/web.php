@@ -43,7 +43,19 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
     Route::group(['middleware' => ['role:Admin']], function () {
         Route::resource('departement',DepartemenController::class);
         Route::resource('position',JabatanController::class);
-        Route::resource('jobs',LowonganController::class);
+        Route::resource('jobs',LowonganController::class); 
+        
+        
+        Route::get('/jobs/{id}/test', [LowonganController::class, 'view_test'])->name('view_test');
+        Route::post('/jobs/test/store', [LowonganController::class, 'store_test'])->name('store_test');
+        Route::put('/jobs/test/{id}/update', [LowonganController::class, 'update_test'])->name('update_test');
+        Route::delete('/jobs/test/{id}/delete', [LowonganController::class, 'destroy_test'])->name('delete_test');
+        
+        Route::get('/jobs/{id}/psikotest', [LowonganController::class, 'view_psikotest'])->name('view_psikotest');
+        Route::post('/jobs/psikotest/store', [LowonganController::class, 'store_psikotest'])->name('store_psikotest');
+        Route::put('/jobs/psikotest/{id}/update', [LowonganController::class, 'update_psikotest'])->name('update_psikotest');
+        Route::delete('/jobs/psikotest/{id}/delete', [LowonganController::class, 'destroy_psikotest'])->name('delete_psikotest');
+        
         Route::get('/jobseekers', [JobSeekersController::class, 'index'])->name('jobseekers');
         Route::resource('users',UsersController::class);
     });

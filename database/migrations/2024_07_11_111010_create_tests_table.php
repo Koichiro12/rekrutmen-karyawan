@@ -16,10 +16,10 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('jobs_id');
             $table->text('question');
-            $table->string('option_a');
-            $table->string('option_b');
-            $table->string('option_c');
-            $table->string('option_d');
+            $table->text('option_a');
+            $table->text('option_b');
+            $table->text('option_c');
+            $table->text('option_d');
             $table->string('answer');
             $table->timestamps();
         });
