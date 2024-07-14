@@ -65,7 +65,7 @@ class UsersController extends Controller
         if(!isset($request['user_phone']) || $request['user_phone'] == null){
             $request['user_phone'] = '-';   
         }
-        if(User::insertData($request)){
+        if(User::insertData($request,['foto'])){
             return redirect()->route('users.index')->with('sukses','Create Users Successfully');
         }
         return redirect()->back()->with('eror','Oops Something Went Wrong');

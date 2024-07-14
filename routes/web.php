@@ -61,10 +61,12 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
     });
     Route::group(['middleware' => ['role:User']], function () {
         Route::get('/personal_data', [PersonalDataController::class, 'index'])->name('personal_data');
+       
         Route::resource('educations',EducationController::class);
         Route::resource('experiences',ExperienceController::class);
         Route::resource('skills',SkillsController::class);
         Route::resource('trainings',TrainingController::class);
+       
         Route::get('/search_job', [\App\Http\Controllers\User\JobseekersController::class, 'search_job'])->name('search_job');
         Route::get('/my_apply_job', [\App\Http\Controllers\User\JobseekersController::class, 'apply_job'])->name('apply_job');
     });
