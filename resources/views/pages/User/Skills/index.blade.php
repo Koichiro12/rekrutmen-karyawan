@@ -28,11 +28,28 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
+                                        <th>Skills</th>
+                                        <th>Levels</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                  
+                                   @foreach ($skills as $item)
+                                       <tr>
+                                        <td>{{$loop->index + 1}}</td>
+                                        <td>{{$item->skills}}</td>
+                                        <td>{{$item->skill_level}}</td>
+                                        <td>
+                                            <form action="{{ route('skills.destroy', $item->id) }}" method="post">
+                                                @method('DELETE')
+                                                @csrf
+                                                <a href="{{ route('skills.edit', $item->id) }}"
+                                                    class="btn btn-sm btn-warning">Edit</a>
+                                                <button type="submit" class="btn btn-sm btn-danger form-confirm">Delete</button>
+                                            </form>
+                                        </td>
+                                       </tr>
+                                   @endforeach
                                 </tbody>
                             </table>
                         </div>

@@ -28,6 +28,10 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
+                                        <th>Last Experience</th>
+                                        <th>Length Of Work</th>
+                                        <th>Facility & Salary</th>
+                                        <th>Reason Stop Working</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>

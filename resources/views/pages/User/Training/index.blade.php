@@ -28,6 +28,9 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
+                                        <th>Training</th>
+                                        <th>Certification</th>
+                                        <th>Year Of Training</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>

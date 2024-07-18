@@ -28,11 +28,17 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
+                                        <th>School</th>
+                                        <th>Major Education</th>
+                                        <th>Year Of Education</th>
+                                        <th>Average Scores</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                  
+                                  @foreach ($educations as $item)
+                                      
+                                  @endforeach
                                 </tbody>
                             </table>
                         </div>
