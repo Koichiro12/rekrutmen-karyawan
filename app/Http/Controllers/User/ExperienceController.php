@@ -42,6 +42,20 @@ class ExperienceController extends Controller
     public function store(Request $request)
     {
         //
+        $validate = \Validator::make($request->all(),[
+            'last_job_departement' => ['required'],
+            'company_name' => ['required'],
+            'last_job_position' => ['required'],
+            'start_job' => ['required'],
+            'end_job' => ['required'],
+            'salary' => ['required'],
+        ]);
+        if($validate->fails()){
+            return redirect()->back()->withErrors($validate)->withInput();
+        }
+        return Experience::insertData($request,[],null,true) 
+        ? redirect()->route('experiences.index')->with('sukses',"Create Experience Successfully") 
+        : redirect()->back()->with('eror',"Create Experience Failed, Please Try Again") ;
     }
 
     /**
@@ -62,7 +76,7 @@ class ExperienceController extends Controller
         $data['page_name'] = 'Edit Experiences';
         $data['page_subname'] = 'Edit Experiences data here';
         $data['page_breadcum'] = array_merge($data['page_breadcum'],[['name' => 'Experiences','link' => route('experiences.index'),'status' => ''],['name' => 'Edit Experiences','link' => route('experiences.edit',$id),'status' => 'active']]);
-        $education = Experience::findOrFail($id);
+        $experiences = Experience::findOrFail($id);
         return view('pages.user.experiences.edit',compact(['data','experiences']));
     }
 
@@ -72,6 +86,20 @@ class ExperienceController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $validate = \Validator::make($request->all(),[
+            'last_job_departement' => ['required'],
+            'company_name' => ['required'],
+            'last_job_position' => ['required'],
+            'start_job' => ['required'],
+            'end_job' => ['required'],
+            'salary' => ['required'],
+        ]);
+        if($validate->fails()){
+            return redirect()->back()->withErrors($validate)->withInput();
+        }
+        return Experience::updateData($id,$request) 
+        ? redirect()->route('experiences.index')->with('sukses',"Update Experience Successfully") 
+        : redirect()->back()->with('eror',"Update Experience Failed, Please Try Again") ;
     }
 
     /**
@@ -80,5 +108,8 @@ class ExperienceController extends Controller
     public function destroy(string $id)
     {
         //
+        return Experience::deleteData($id) ? 
+        redirect()->route('experiences.index')->with('sukses','Delete Experiences Successfully') :
+        redirect()->back()->with('eror','Oops,Something Went Wrong, Please Try again');
     }
 }

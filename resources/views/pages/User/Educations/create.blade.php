@@ -30,6 +30,12 @@
                                 <label for="last_education">Grade</label>
                                 <select name="last_education" id="last_education" class="form-control {{ $errors->first('last_education') != null ? 'is-invalid' : '' }}" required>
                                     <option value="">--Select Grade--</option>
+                                    <option value="SD">SD</option>
+                                    <option value="SMP">SMP</option>
+                                    <option value="SMA / SMK Sederajat">SMA / SMK Sederajat</option>
+                                    <option value="D3">D3</option>
+                                    <option value="S1">S1</option>
+                                    <option value="S2">S2</option>
                                 </select>
                                 @if ($errors->first('last_education') != null)
                                     <div class="invalid-feedback">

@@ -19,10 +19,10 @@ return new class extends Migration
             $table->string('last_job_position');
             $table->string('start_job');
             $table->string('end_job');
-            $table->string('salary');
-            $table->string('intensive_pay');
-            $table->string('last_job_facility');
-            $table->text('reason_stop_working');
+            $table->string('salary')->default('0');
+            $table->string('intensive_pay')->default('0');
+            $table->string('last_job_facility')->default('-');
+            $table->text('reason_stop_working')->default('-');
             $table->timestamps();
         });
     }

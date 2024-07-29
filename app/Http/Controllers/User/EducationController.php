@@ -42,6 +42,20 @@ class EducationController extends Controller
     public function store(Request $request)
     {
         //
+        $validate = \Validator::make($request->all(),[
+            'last_education' => ['required'],
+            'school_name' => ['required'],
+            'city' => ['required'],
+            'major_education' => ['required'],
+            'start_year' => ['required'],
+            'end_year' => ['required'],
+            'average_value' => ['required'],
+        ]);
+        if($validate->fails()){
+            return redirect()->back()->withErrors($validate)->withInput();
+        }
+        return Educations::insertData($request,[],null,true) ? redirect()->route('educations.index')->with('sukses',"Create Educations Successfully") : redirect()->back()->with('eror',"Create Educations Failed, Please Try Again") ;
+
     }
 
     /**
@@ -72,6 +86,19 @@ class EducationController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $validate = \Validator::make($request->all(),[
+            'last_education' => ['required'],
+            'school_name' => ['required'],
+            'city' => ['required'],
+            'major_education' => ['required'],
+            'start_year' => ['required'],
+            'end_year' => ['required'],
+            'average_value' => ['required'],
+        ]);
+        if($validate->fails()){
+            return redirect()->back()->withErrors($validate)->withInput();
+        }
+        return Educations::updateData($id,$request) ? redirect()->route('educations.index')->with('sukses',"Update Educations Successfully") : redirect()->back()->with('eror',"Update Educations Failed, Please Try Again") ;
     }
 
     /**
@@ -80,5 +107,8 @@ class EducationController extends Controller
     public function destroy(string $id)
     {
         //
+        return Educations::deleteData($id) ? 
+        redirect()->route('educations.index')->with('sukses','Delete Educations Successfully') :
+        redirect()->back()->with('eror','Oops,Something Went Wrong, Please Try again');
     }
 }

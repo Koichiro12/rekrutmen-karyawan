@@ -3,13 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Auth;
+use Schema;
 class AppModel extends Model
 {
     protected $fillable = [];
     protected static $_uniqueKey = [];
     protected static $_primaryKey = 'id';
     protected $table = '';
+
 
 
     public static function getCount(){
@@ -19,11 +21,15 @@ class AppModel extends Model
     public static function getData($id){
         return self::where(static::$_primaryKey,$id)->first();
     }
-    public static function insertData($request, $exception = [],$kode = null){
+    public static function insertData($request, $exception = [],$kode = null,$withUserId = false){
         
         $exception = array_merge($exception, ['_token', '_method']);
         $data = $request->except($exception);
         $data['created_at'] = date('Y-m-d H:i:s');
+       
+        if(Auth::check() && $withUserId){
+            $data['user_id'] = auth()->user()->id;
+        }
         if($kode != null){
             $data[$kode] = self::getKode();
         }

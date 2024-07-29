@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Skills;
 use Illuminate\Http\Request;
+use Validator;
 
 class SkillsController extends Controller
 {
@@ -42,6 +43,14 @@ class SkillsController extends Controller
     public function store(Request $request)
     {
         //
+        $validate = Validator::make($request->all(),[
+            'skills' => ['required'],
+            'skill_level' => ['required']
+        ]);
+        if($validate->fails()){
+            return redirect()->back()->withErrors($validate)->withInput();
+        }
+        return Skills::insertData($request,[],null,true) ? redirect()->route('skills.index')->with('sukses',"Create Skills Successfully") : redirect()->back()->with('eror',"Create Skills Failed, Please Try Again") ;
     }
 
     /**
@@ -72,6 +81,14 @@ class SkillsController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $validate = Validator::make($request->all(),[
+            'skills' => ['required'],
+            'skill_level' => ['required']
+        ]);
+        if($validate->fails()){
+            return redirect()->back()->withErrors($validate)->withInput();
+        }
+        return Skills::updateData($id,$request) ? redirect()->route('skills.index')->with('sukses',"Update Skills Successfully") : redirect()->back()->with('eror',"Update Skills Failed, Please Try Again") ;
     }
 
     /**
@@ -80,5 +97,8 @@ class SkillsController extends Controller
     public function destroy(string $id)
     {
         //
+        return Skills::deleteData($id) ? 
+        redirect()->route('skills.index')->with('sukses','Delete Skills Successfully') :
+        redirect()->back()->with('eror','Oops,Something Went Wrong, Please Try again');
     }
 }

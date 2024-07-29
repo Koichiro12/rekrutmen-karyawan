@@ -36,7 +36,35 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                  
+                                  @foreach ($experience as $item)
+                                      <tr>
+                                        <td>{{$loop->index + 1}}</td>
+                                        <td>
+                                            <h3>{{$item->last_job_position}}</h3>
+                                            <p>{{$item->company_name}} <br>
+                                            <small>{{$item->last_job_departement}}</small></p>
+                                        </td>
+                                        <td>{{ date_format(date_create(($item->start_job)),'M Y') }} - {{date_format(date_create(($item->end_job)),'M Y')}}</td>
+                                        <td>Facilities : <br>
+                                            {{$item->last_job_facility}}
+                                            <br>
+                                            Salary : <br>
+                                            Rp.{{number_format($item->salary)}} <br>
+                                            Intensive Pay : <br>
+                                            Rp.{{number_format($item->intensive_pay)}}
+                                        </td>
+                                        <td>{{$item->reason_stop_working}}</td>
+                                        <td>
+                                            <form action="{{ route('experiences.destroy', $item->id) }}" method="post">
+                                                @method('DELETE')
+                                                @csrf
+                                                <a href="{{ route('experiences.edit', $item->id) }}"
+                                                    class="btn btn-sm btn-warning">Edit</a>
+                                                <button type="submit" class="btn btn-sm btn-danger form-confirm">Delete</button>
+                                            </form>
+                                        </td>
+                                      </tr>
+                                  @endforeach
                                 </tbody>
                             </table>
                         </div>

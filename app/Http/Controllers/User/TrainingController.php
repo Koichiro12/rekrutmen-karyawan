@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Trainings;
 use Illuminate\Http\Request;
+use Validator;
 
 class TrainingController extends Controller
 {
@@ -19,8 +20,8 @@ class TrainingController extends Controller
         $data['page_name'] = 'Trainings';
         $data['page_subname'] = 'Trainings data will appear here';
         $data['page_breadcum'] = array_merge($data['page_breadcum'],[['name' => 'Trainings','link' => route('trainings.index'),'status' => 'active']]);
-        $training = Trainings::where('user_id','=',$id)->latest()->get();
-        return view('pages.user.training.index',compact(['data','training']));
+        $trainings = Trainings::where('user_id','=',$id)->latest()->get();
+        return view('pages.user.training.index',compact(['data','trainings']));
     }
 
     /**
@@ -42,6 +43,17 @@ class TrainingController extends Controller
     public function store(Request $request)
     {
         //
+        $validate = Validator::make($request->all(),[
+            'training' => ['required'],
+            'certification' => ['required'],
+            'organizer' => ['required'],
+            'year_of_training' => ['required']
+        ]);
+        if($validate->fails()){
+            return redirect()->back()->withErrors($validate)->withInput();
+        }
+        return Trainings::insertData($request,[],null,true) ? redirect()->route('trainings.index')->with('sukses',"Create Trainings Successfully") : redirect()->back()->with('eror',"Create Trainings Failed, Please Try Again") ;
+
     }
 
     /**
@@ -72,6 +84,17 @@ class TrainingController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $validate = Validator::make($request->all(),[
+            'training' => ['required'],
+            'certification' => ['required'],
+            'organizer' => ['required'],
+            'year_of_training' => ['required']
+        ]);
+        if($validate->fails()){
+            return redirect()->back()->withErrors($validate)->withInput();
+        }
+        return Trainings::updateData($id,$request) ? redirect()->route('trainings.index')->with('sukses',"Update Trainings Successfully") : redirect()->back()->with('eror',"Update Trainings Failed, Please Try Again") ;
+
     }
 
     /**
@@ -80,5 +103,8 @@ class TrainingController extends Controller
     public function destroy(string $id)
     {
         //
+        return Trainings::deleteData($id) ? 
+        redirect()->route('trainings.index')->with('sukses','Delete Trainings Successfully') :
+        redirect()->back()->with('eror','Oops,Something Went Wrong, Please Try again');
     }
 }

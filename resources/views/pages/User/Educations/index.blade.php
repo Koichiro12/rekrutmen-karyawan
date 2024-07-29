@@ -37,7 +37,26 @@
                                 </thead>
                                 <tbody>
                                   @foreach ($educations as $item)
-                                      
+                                      <tr>
+                                        <td>{{$loop->index + 1}}</td>
+                                        <td>
+                                            <h3>{{$item->school_name}}</h3>
+                                            <small>{{$item->last_education}}</small>
+                                            <p>{{$item->city}}</p>
+                                        </td>
+                                        <td>{{$item->major_education}}</td>
+                                        <td>{{ date_format(date_create(($item->start_year)),'M Y') }} - {{date_format(date_create(($item->end_year)),'M Y')}}</td>
+                                        <td>{{$item->average_value}}</td>
+                                        <td>
+                                            <form action="{{ route('educations.destroy', $item->id) }}" method="post">
+                                                @method('DELETE')
+                                                @csrf
+                                                <a href="{{ route('educations.edit', $item->id) }}"
+                                                    class="btn btn-sm btn-warning">Edit</a>
+                                                <button type="submit" class="btn btn-sm btn-danger form-confirm">Delete</button>
+                                            </form>
+                                        </td>
+                                      </tr>
                                   @endforeach
                                 </tbody>
                             </table>

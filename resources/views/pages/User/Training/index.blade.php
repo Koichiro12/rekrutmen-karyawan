@@ -30,12 +30,30 @@
                                         <th>No</th>
                                         <th>Training</th>
                                         <th>Certification</th>
+                                        <th>Organizer</th>
                                         <th>Year Of Training</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                  
+                                  @foreach ($trainings as $item)
+                                      <tr>
+                                        <td>{{$loop->index + 1}}</td>
+                                        <td>{{$item->training}}</td>
+                                        <td>{{$item->certification}}</td>
+                                        <td>{{$item->organizer}}</td>
+                                        <td>{{$item->year_of_training}}</td>
+                                        <td>
+                                            <form action="{{ route('trainings.destroy', $item->id) }}" method="post">
+                                                @method('DELETE')
+                                                @csrf
+                                                <a href="{{ route('trainings.edit', $item->id) }}"
+                                                    class="btn btn-sm btn-warning">Edit</a>
+                                                <button type="submit" class="btn btn-sm btn-danger form-confirm">Delete</button>
+                                            </form>
+                                        </td>
+                                      </tr>
+                                  @endforeach
                                 </tbody>
                             </table>
                         </div>
