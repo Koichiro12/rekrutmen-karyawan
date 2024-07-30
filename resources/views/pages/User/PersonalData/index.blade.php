@@ -83,7 +83,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="date_birth">Date</label>
-                                        <input type="text" name="date_birth" id="date_birth"
+                                        <input type="date" name="date_birth" id="date_birth"
                                             class="form-control {{ $errors->first('date_birth') != null ? 'is-invalid' : '' }}"
                                             placeholder="Date Of Birth"
                                             value="{{ isset($job_seekers) && $job_seekers->date_birth != null ? $job_seekers->date_birth : old('date_birth') }}"
@@ -170,6 +170,9 @@
                                     class="form-control {{ $errors->first('status_residence') != null ? 'is-invalid' : '' }}"
                                     required>
                                     <option value="">--Select Status Residence--</option>
+                                    <option value="Live with Family">Live with Family</option>
+                                    <option value="Own House">Own House</option>
+                                    <option value="Rent">Rent</option>
                                 </select>
                                 @if ($errors->first('status_residence') != null)
                                     <div class="invalid-feedback">
@@ -183,6 +186,9 @@
                                     class="form-control {{ $errors->first('married_status') != null ? 'is-invalid' : '' }}"
                                     required>
                                     <option value="">--Select Married Status--</option>
+                                    <option value="Single">Single</option>
+                                    <option value="Married">Married</option>
+                                    <option value="Ever Married / Divorce">Ever Married / Divorce</option>
                                 </select>
                                 @if ($errors->first('married_status') != null)
                                     <div class="invalid-feedback">
@@ -209,12 +215,67 @@
                                     class="form-control {{ $errors->first('religion') != null ? 'is-invalid' : '' }}"
                                     required>
                                     <option value="">--Select Religion--</option>
+                                    <option value="Islam">Islam</option>
+                                    <option value="Kristen">Kristen</option>
+                                    <option value="Hindu">Hindu</option>
+                                    <option value="Budha">Budha</option>
+                                    <option value="Konghucu">Konghucu</option>
+                                    <option value="Lainnya">Lainnya</option>
                                 </select>
                                 @if ($errors->first('religion') != null)
                                     <div class="invalid-feedback">
                                         {{ $errors->first('religion') }}
                                     </div>
                                 @endif
+                            </div>
+                            <div class="form-group">
+                                <label for="npwp">NPWP</label>
+                                <input type="text" name="npwp" id="npwp"
+                                    class="form-control {{ $errors->first('npwp') != null ? 'is-invalid' : '' }}"
+                                    placeholder="NPWP"
+                                    value="{{ isset($job_seekers) && $job_seekers->npwp != null ? $job_seekers->npwp : old('npwp') }}">
+                                @if ($errors->first('npwp') != null)
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('npwp') }}
+                                    </div>
+                                @endif
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="sim">SIM</label>
+                                        <select name="sim" id="sim"
+                                            class="form-control {{ $errors->first('sim') != null ? 'is-invalid' : '' }}"
+                                            required>
+                                            <option value="">--Select SIM--</option>
+                                            <option value="A">A</option>
+                                            <option value="B1">B1</option>
+                                            <option value="B2">B2</option>
+                                            <option value="C">C</option>
+                                            <option value="D">D</option>
+                                        </select>
+                                        @if ($errors->first('sim') != null)
+                                            <div class="invalid-feedback">
+                                                {{ $errors->first('sim') }}
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="sim_number">SIM Number</label>
+                                        <input type="text" name="sim_number" id="sim_number"
+                                            class="form-control {{ $errors->first('sim_number') != null ? 'is-invalid' : '' }}"
+                                            placeholder="Sim Number"
+                                            value="{{ isset($job_seekers) && $job_seekers->sim_number != null ? $job_seekers->sim_number : old('sim_number') }}"
+                                            required>
+                                        @if ($errors->first('sim_number') != null)
+                                            <div class="invalid-feedback">
+                                                {{ $errors->first('sim_number') }}
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -227,7 +288,8 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="jobseeker_cv">Curiculum Vitae</label>
-                                <input type="file" name="jobseeker_cv" id="jobseeker_cv" class="form-control form-input {{ $errors->first('jobseeker_cv') != null ? 'is-invalid' : '' }}">
+                                <input type="file" name="jobseeker_cv" id="jobseeker_cv"
+                                    class="form-control form-input {{ $errors->first('jobseeker_cv') != null ? 'is-invalid' : '' }}">
                                 @if ($errors->first('jobseeker_cv') != null)
                                     <div class="invalid-feedback">
                                         {{ $errors->first('jobseeker_cv') }}
