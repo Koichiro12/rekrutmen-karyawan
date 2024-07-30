@@ -13,13 +13,13 @@
                         {{ session('sukses') }}
                     </div>
                 @endif
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">
-                            Personal Data
-                        </h4>
-                    </div>
-                    <form action="" method="POST" enctype="multipart/form-data">
+                <form action="" method="POST" enctype="multipart/form-data">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">
+                                Personal Data
+                            </h4>
+                        </div>
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="user_image">Image</label>
@@ -40,7 +40,8 @@
                                 <input type="text" name="nik" id="nik"
                                     class="form-control {{ $errors->first('nik') != null ? 'is-invalid' : '' }}"
                                     placeholder="NIK"
-                                    value="{{ isset($job_seekers) && $job_seekers->nik != null ? $job_seekers->nik : old('nik') }}" required>
+                                    value="{{ isset($job_seekers) && $job_seekers->nik != null ? $job_seekers->nik : old('nik') }}"
+                                    required>
                                 @if ($errors->first('nik') != null)
                                     <div class="invalid-feedback">
                                         {{ $errors->first('nik') }}
@@ -52,7 +53,8 @@
                                 <input type="text" name="name" id="name"
                                     class="form-control {{ $errors->first('name') != null ? 'is-invalid' : '' }}"
                                     placeholder="Full Name"
-                                    value="{{ isset($job_seekers) && $job_seekers->name != null ? $job_seekers->name : old('name') }}" required>
+                                    value="{{ isset($job_seekers) && $job_seekers->name != null ? $job_seekers->name : old('name') }}"
+                                    required>
                                 @if ($errors->first('name') != null)
                                     <div class="invalid-feedback">
                                         {{ $errors->first('name') }}
@@ -69,7 +71,8 @@
                                         <input type="text" name="place_birth" id="place_birth"
                                             class="form-control {{ $errors->first('place_birth') != null ? 'is-invalid' : '' }}"
                                             placeholder="Place Of Birth"
-                                            value="{{ isset($job_seekers) && $job_seekers->place_birth != null ? $job_seekers->place_birth : old('place_birth') }}" required>
+                                            value="{{ isset($job_seekers) && $job_seekers->place_birth != null ? $job_seekers->place_birth : old('place_birth') }}"
+                                            required>
                                         @if ($errors->first('place_birth') != null)
                                             <div class="invalid-feedback">
                                                 {{ $errors->first('place_birth') }}
@@ -83,7 +86,8 @@
                                         <input type="text" name="date_birth" id="date_birth"
                                             class="form-control {{ $errors->first('date_birth') != null ? 'is-invalid' : '' }}"
                                             placeholder="Date Of Birth"
-                                            value="{{ isset($job_seekers) && $job_seekers->date_birth != null ? $job_seekers->date_birth : old('date_birth') }}" required>
+                                            value="{{ isset($job_seekers) && $job_seekers->date_birth != null ? $job_seekers->date_birth : old('date_birth') }}"
+                                            required>
                                         @if ($errors->first('date_birth') != null)
                                             <div class="invalid-feedback">
                                                 {{ $errors->first('date_birth') }}
@@ -94,10 +98,16 @@
                             </div>
                             <div class="form-group">
                                 <label for="gender">Gender</label>
-                                <select name="gender" id="gender" class="form-control {{ $errors->first('gender') != null ? 'is-invalid' : '' }}" required>
+                                <select name="gender" id="gender"
+                                    class="form-control {{ $errors->first('gender') != null ? 'is-invalid' : '' }}"
+                                    required>
                                     <option value="">--Select Gender--</option>
-                                    <option value="L" {{ isset($job_seekers) && $job_seekers->gender != null && $job_seekers->gender == 'L' ? 'selected' : '' }}>Male</option>
-                                    <option value="P" {{ isset($job_seekers) && $job_seekers->gender != null && $job_seekers->gender == 'P' ? 'selected' : '' }}>Female</option>
+                                    <option value="L"
+                                        {{ isset($job_seekers) && $job_seekers->gender != null && $job_seekers->gender == 'L' ? 'selected' : '' }}>
+                                        Male</option>
+                                    <option value="P"
+                                        {{ isset($job_seekers) && $job_seekers->gender != null && $job_seekers->gender == 'P' ? 'selected' : '' }}>
+                                        Female</option>
                                 </select>
                                 @if ($errors->first('gender') != null)
                                     <div class="invalid-feedback">
@@ -107,7 +117,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="address">Address</label>
-                                <textarea name="address" id="address" placeholder="Address" class="form-control {{ $errors->first('address') != null ? 'is-invalid' : '' }}" cols="30" rows="10">{{ isset($job_seekers) && $job_seekers->address != null ? $job_seekers->address : old('address') }}</textarea>
+                                <textarea name="address" id="address" placeholder="Address"
+                                    class="form-control {{ $errors->first('address') != null ? 'is-invalid' : '' }}" cols="30" rows="10">{{ isset($job_seekers) && $job_seekers->address != null ? $job_seekers->address : old('address') }}</textarea>
                                 @if ($errors->first('address') != null)
                                     <div class="invalid-feedback">
                                         {{ $errors->first('address') }}
@@ -119,7 +130,8 @@
                                 <input type="text" name="domisili" id="domisili"
                                     class="form-control {{ $errors->first('domisili') != null ? 'is-invalid' : '' }}"
                                     placeholder="Domisili"
-                                    value="{{ isset($job_seekers) && $job_seekers->domisili != null ? $job_seekers->domisili : old('domisili') }}" required>
+                                    value="{{ isset($job_seekers) && $job_seekers->domisili != null ? $job_seekers->domisili : old('domisili') }}"
+                                    required>
                                 @if ($errors->first('domisili') != null)
                                     <div class="invalid-feedback">
                                         {{ $errors->first('domisili') }}
@@ -131,7 +143,8 @@
                                 <input type="text" name="phone_number" id="phone_number"
                                     class="form-control {{ $errors->first('phone_number') != null ? 'is-invalid' : '' }}"
                                     placeholder="Phone Number"
-                                    value="{{ isset($job_seekers) && $job_seekers->phone_number != null ? $job_seekers->phone_number : old('phone_number') }}" required>
+                                    value="{{ isset($job_seekers) && $job_seekers->phone_number != null ? $job_seekers->phone_number : old('phone_number') }}"
+                                    required>
                                 @if ($errors->first('phone_number') != null)
                                     <div class="invalid-feedback">
                                         {{ $errors->first('phone_number') }}
@@ -143,7 +156,8 @@
                                 <input type="email" name="email" id="email"
                                     class="form-control {{ $errors->first('email') != null ? 'is-invalid' : '' }}"
                                     placeholder="Email"
-                                    value="{{ isset($job_seekers) && $job_seekers->email != null ? $job_seekers->email : old('email') }}" required>
+                                    value="{{ isset($job_seekers) && $job_seekers->email != null ? $job_seekers->email : old('email') }}"
+                                    required>
                                 @if ($errors->first('email') != null)
                                     <div class="invalid-feedback">
                                         {{ $errors->first('email') }}
@@ -152,7 +166,9 @@
                             </div>
                             <div class="form-group">
                                 <label for="status_residence">Status Residence</label>
-                                <select name="status_residence" id="status_residence" class="form-control {{ $errors->first('status_residence') != null ? 'is-invalid' : '' }}" required>
+                                <select name="status_residence" id="status_residence"
+                                    class="form-control {{ $errors->first('status_residence') != null ? 'is-invalid' : '' }}"
+                                    required>
                                     <option value="">--Select Status Residence--</option>
                                 </select>
                                 @if ($errors->first('status_residence') != null)
@@ -163,7 +179,9 @@
                             </div>
                             <div class="form-group">
                                 <label for="married_status">Married Status</label>
-                                <select name="married_status" id="married_status" class="form-control {{ $errors->first('married_status') != null ? 'is-invalid' : '' }}" required>
+                                <select name="married_status" id="married_status"
+                                    class="form-control {{ $errors->first('married_status') != null ? 'is-invalid' : '' }}"
+                                    required>
                                     <option value="">--Select Married Status--</option>
                                 </select>
                                 @if ($errors->first('married_status') != null)
@@ -177,7 +195,8 @@
                                 <input type="text" name="citizen" id="citizen"
                                     class="form-control {{ $errors->first('citizen') != null ? 'is-invalid' : '' }}"
                                     placeholder="Citizen"
-                                    value="{{ isset($job_seekers) && $job_seekers->citizen != null ? $job_seekers->citizen : old('citizen') }}" required>
+                                    value="{{ isset($job_seekers) && $job_seekers->citizen != null ? $job_seekers->citizen : old('citizen') }}"
+                                    required>
                                 @if ($errors->first('citizen') != null)
                                     <div class="invalid-feedback">
                                         {{ $errors->first('citizen') }}
@@ -186,7 +205,9 @@
                             </div>
                             <div class="form-group">
                                 <label for="religion">Religion</label>
-                                <select name="religion" id="religion" class="form-control {{ $errors->first('religion') != null ? 'is-invalid' : '' }}" required>
+                                <select name="religion" id="religion"
+                                    class="form-control {{ $errors->first('religion') != null ? 'is-invalid' : '' }}"
+                                    required>
                                     <option value="">--Select Religion--</option>
                                 </select>
                                 @if ($errors->first('religion') != null)
@@ -196,9 +217,32 @@
                                 @endif
                             </div>
                         </div>
-                    </form>
-
-                </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                Curiculum Vitae
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="jobseeker_cv">Curiculum Vitae</label>
+                                <input type="file" name="jobseeker_cv" id="jobseeker_cv" class="form-control form-input {{ $errors->first('jobseeker_cv') != null ? 'is-invalid' : '' }}">
+                                @if ($errors->first('jobseeker_cv') != null)
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('jobseeker_cv') }}
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <button type="submit" class="btn btn-sm btn-primary">Save Changes</button>
+                            <button type="reset" class="btn btn-sm btn-danger">Reset</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </section>

@@ -19,4 +19,7 @@ class PersonalDataController extends Controller
         $job_seekers = JobSeekers::where('user_id',$id)->first();
         return view('pages.user.personaldata.index',compact(['data','job_seekers']));
     }
+    public function update(){
+        
+    }
 }

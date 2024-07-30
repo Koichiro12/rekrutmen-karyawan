@@ -34,8 +34,9 @@
                                     <option value="SMP">SMP</option>
                                     <option value="SMA / SMK Sederajat">SMA / SMK Sederajat</option>
                                     <option value="D3">D3</option>
-                                    <option value="S1">S1</option>
+                                    <option value="D4 / S1">S1</option>
                                     <option value="S2">S2</option>
+                                    <option value="S3">S3</option>
                                 </select>
                                 @if ($errors->first('last_education') != null)
                                     <div class="invalid-feedback">

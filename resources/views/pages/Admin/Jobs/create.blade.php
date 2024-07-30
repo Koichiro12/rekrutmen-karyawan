@@ -101,8 +101,6 @@
                                             <option value="SD" {{old('min_education') == 'SD' ? 'selected' : ''}}>SD</option>
                                             <option value="SMP" {{old('min_education') == 'SMP' ? 'selected' : ''}}>SMP</option>
                                             <option value="SMA / SMK Sederajat" {{old('min_education') == 'SMA / SMK Sederajat' ? 'selected' : ''}}>SMA / SMK Sederajat</option>
-                                            <option value="D1" {{old('min_education') == 'D1' ? 'selected' : ''}}>D1</option>
-                                            <option value="D2" {{old('min_education') == 'D2' ? 'selected' : ''}}>D2</option>
                                             <option value="D3" {{old('min_education') == 'D3' ? 'selected' : ''}}>D3</option>
                                             <option value="D4 / S1" {{old('min_education') == 'D4 / S1' ? 'selected' : ''}}>D4 / S1</option>
                                             <option value="S2" {{old('min_education') == 'S2' ? 'selected' : ''}}>S2</option>

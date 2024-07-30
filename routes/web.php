@@ -61,6 +61,7 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
     });
     Route::group(['middleware' => ['role:User']], function () {
         Route::get('/personal_data', [PersonalDataController::class, 'index'])->name('personal_data');
+        Route::post('/personal_data/update', [PersonalDataController::class, 'update'])->name('update_personal_data');
        
         Route::resource('educations',EducationController::class);
         Route::resource('experiences',ExperienceController::class);

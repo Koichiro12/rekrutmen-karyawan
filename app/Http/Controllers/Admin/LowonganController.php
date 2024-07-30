@@ -65,7 +65,7 @@ class LowonganController extends Controller
             return redirect()->back()->withErrors($validate)->withInput();
         }
         $date_now = date('Y-m-d');
-        $request['status'] = $request['open_date'] >= $date_now && $request['close_date'] >= $date_now ? '1' : '0';
+        $request['status'] = $date_now >= $request['open_date']   && $date_now <= $request['close_date']  ? '1' : '0';
         return Job::insertData($request) ? redirect()->route('jobs.index')->with('sukses','Create Job Successfully') : redirect()->back()->with('eror','Oops,Something Went Wrong, Please Try again');
     }
 
@@ -116,7 +116,7 @@ class LowonganController extends Controller
             return redirect()->back()->withErrors($validate)->withInput();
         }
         $date_now = date('Y-m-d');
-        $request['status'] = $request['open_date'] >= $date_now && $request['close_date'] >= $date_now ? '1' : '0';
+        $request['status'] = $date_now >= $request['open_date']   && $date_now <= $request['close_date']  ? '1' : '0';
         return Job::updateData($id,$request) ? redirect()->route('jobs.index')->with('sukses','Create Job Successfully') : redirect()->back()->with('eror','Oops,Something Went Wrong, Please Try again');
     }
 

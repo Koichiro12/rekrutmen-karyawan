@@ -34,8 +34,9 @@
                                     <option value="SMP" {{$education->last_education == 'SMP' ? 'selected' : ''}}>SMP</option>
                                     <option value="SMA / SMK Sederajat" {{$education->last_education == 'SMA / SMK Sederajat' ? 'selected' : ''}}>SMA / SMK Sederajat</option>
                                     <option value="D3" {{$education->last_education == 'D3' ? 'selected' : ''}}>D3</option>
-                                    <option value="S1" {{$education->last_education == 'S1' ? 'selected' : ''}}>S1</option>
+                                    <option value="D4 / S1" {{$education->last_education == 'D4 / S1' ? 'selected' : ''}}>S1</option>
                                     <option value="S2" {{$education->last_education == 'S2' ? 'selected' : ''}}>S2</option>
+                                    <option value="S3" {{$education->last_education == 'S3' ? 'selected' : ''}}>S3</option>
                                 </select>
                                 @if ($errors->first('last_education') != null)
                                     <div class="invalid-feedback">
