@@ -69,6 +69,8 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
         Route::resource('trainings',TrainingController::class);
        
         Route::get('/search_job', [\App\Http\Controllers\User\JobseekersController::class, 'search_job'])->name('search_job');
+        Route::post('/search_job/{id}/apply', [\App\Http\Controllers\User\JobseekersController::class, 'apply'])->name('apply');
+        Route::get('/search_job/{id}/detail', [\App\Http\Controllers\User\JobseekersController::class, 'detail'])->name('detail_job');
         Route::get('/my_apply_job', [\App\Http\Controllers\User\JobseekersController::class, 'apply_job'])->name('apply_job');
     });
   

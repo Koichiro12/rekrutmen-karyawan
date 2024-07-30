@@ -58,13 +58,15 @@
                                                 <hr>
                                                 @switch($item->status)
                                                 @case(0)
-                                                <a href="" class="btn btn-sm btn-light">ReadMore..</a>
+                                                <a href="{{route('detail_job',$item->id)}}" class="btn btn-sm btn-light">ReadMore..</a>
                                                 @break
 
                                                 @case(1)
-                                                <form action="" method="POST">
-                                                    <button type="submit" class="btn btn-sm btn-success">Apply Job</button>
-                                                    <a href="" class="btn btn-sm btn-light">Read More..</a>
+                                                <form action="{{route('apply',$item->id)}}" method="POST" enctype="multipart/form-data">
+                                                    @method('POST')
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-sm btn-success form-confirm">Apply Job</button>
+                                                    <a href="{{route('detail_job',$item->id)}}" class="btn btn-sm btn-light">Read More..</a>
                                                 </form>
                                                 @break
 
