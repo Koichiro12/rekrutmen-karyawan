@@ -40,7 +40,7 @@ class DashboardController extends Controller
             return redirect()->back()->withErrors($validate)->withInput();
         }
         $request['password'] = Hash::make($request['password']);
-        $user_image = $request->file('foto');
+        $user_image = $request->file('foto'); 
         if( $request->hasFile('foto')){
             $result = date('Ymdhis').$user_image->getClientOriginalName();
             $user_image->move($this->defaultUploadFileDir,$result);

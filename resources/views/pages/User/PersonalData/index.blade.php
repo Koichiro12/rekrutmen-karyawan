@@ -13,7 +13,9 @@
                         {{ session('sukses') }}
                     </div>
                 @endif
-                <form action="" method="POST" enctype="multipart/form-data">
+                <form action="{{route('update_personal_data')}}" method="POST" enctype="multipart/form-data">
+                    @method('POST')
+                    @csrf
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">
@@ -103,10 +105,10 @@
                                     required>
                                     <option value="">--Select Gender--</option>
                                     <option value="L"
-                                        {{ isset($job_seekers) && $job_seekers->gender != null && $job_seekers->gender == 'L' ? 'selected' : '' }}>
+                                        {{ isset($job_seekers) && $job_seekers->gender != null && $job_seekers->gender == 'L' || old('gender') == 'L' ? 'selected' : '' }}>
                                         Male</option>
                                     <option value="P"
-                                        {{ isset($job_seekers) && $job_seekers->gender != null && $job_seekers->gender == 'P' ? 'selected' : '' }}>
+                                        {{ isset($job_seekers) && $job_seekers->gender != null && $job_seekers->gender == 'P' || old('gender') == 'P' ? 'selected' : '' }}>
                                         Female</option>
                                 </select>
                                 @if ($errors->first('gender') != null)
@@ -170,9 +172,9 @@
                                     class="form-control {{ $errors->first('status_residence') != null ? 'is-invalid' : '' }}"
                                     required>
                                     <option value="">--Select Status Residence--</option>
-                                    <option value="Live with Family">Live with Family</option>
-                                    <option value="Own House">Own House</option>
-                                    <option value="Rent">Rent</option>
+                                    <option value="Live with Family" {{ isset($job_seekers) && $job_seekers->status_residence != null && $job_seekers->status_residence == 'Live with Family' || old('status_residence') == 'Live with Family' ? 'selected' : '' }}>Live with Family</option>
+                                    <option value="Own House" {{ isset($job_seekers) && $job_seekers->status_residence != null && $job_seekers->status_residence == 'Own House' || old('status_residence') == 'Own House' ? 'selected' : '' }}>Own House</option>
+                                    <option value="Rent" {{ isset($job_seekers) && $job_seekers->status_residence != null && $job_seekers->status_residence == 'Rent' || old('status_residence') == 'Rent' ? 'selected' : '' }}>Rent</option>
                                 </select>
                                 @if ($errors->first('status_residence') != null)
                                     <div class="invalid-feedback">
@@ -186,9 +188,9 @@
                                     class="form-control {{ $errors->first('married_status') != null ? 'is-invalid' : '' }}"
                                     required>
                                     <option value="">--Select Married Status--</option>
-                                    <option value="Single">Single</option>
-                                    <option value="Married">Married</option>
-                                    <option value="Ever Married / Divorce">Ever Married / Divorce</option>
+                                    <option value="Single" {{ isset($job_seekers) && $job_seekers->married_status != null && $job_seekers->married_status == 'Single' || old('married_status') == 'Single' ? 'selected' : '' }}>Single</option>
+                                    <option value="Married" {{ isset($job_seekers) && $job_seekers->married_status != null && $job_seekers->married_status == 'Married' || old('married_status') == 'Married' ? 'selected' : '' }}>Married</option>
+                                    <option value="Ever Married / Divorce" {{ isset($job_seekers) && $job_seekers->married_status != null && $job_seekers->married_status == 'Ever Married / Divorce' || old('married_status') == 'Ever Married / Divorce' ? 'selected' : '' }}>Ever Married / Divorce</option>
                                 </select>
                                 @if ($errors->first('married_status') != null)
                                     <div class="invalid-feedback">
@@ -211,20 +213,20 @@
                             </div>
                             <div class="form-group">
                                 <label for="religion">Religion</label>
-                                <select name="religion" id="religion"
+                                <select name="relegion" id="religion"
                                     class="form-control {{ $errors->first('religion') != null ? 'is-invalid' : '' }}"
                                     required>
                                     <option value="">--Select Religion--</option>
-                                    <option value="Islam">Islam</option>
-                                    <option value="Kristen">Kristen</option>
-                                    <option value="Hindu">Hindu</option>
-                                    <option value="Budha">Budha</option>
-                                    <option value="Konghucu">Konghucu</option>
-                                    <option value="Lainnya">Lainnya</option>
+                                    <option value="Islam" {{ isset($job_seekers) && $job_seekers->relegion != null && $job_seekers->relegion == 'Islam' || old('relegion') == 'Islam' ? 'selected' : '' }}>Islam</option>
+                                    <option value="Kristen" {{ isset($job_seekers) && $job_seekers->relegion != null && $job_seekers->relegion == 'Kristen' || old('relegion') == 'Kristen' ? 'selected' : '' }}>Kristen</option>
+                                    <option value="Hindu" {{ isset($job_seekers) && $job_seekers->relegion != null && $job_seekers->relegion == 'Hindu' || old('relegion') == 'Hindu' ? 'selected' : '' }}>Hindu</option>
+                                    <option value="Budha" {{ isset($job_seekers) && $job_seekers->relegion != null && $job_seekers->relegion == 'Budha' || old('relegion') == 'Budha' ? 'selected' : '' }}>Budha</option>
+                                    <option value="Konghucu" {{ isset($job_seekers) && $job_seekers->relegion != null && $job_seekers->relegion == 'Konghucu' || old('relegion') == 'Konghucu' ? 'selected' : '' }}>Konghucu</option>
+                                    <option value="Lainnya" {{ isset($job_seekers) && $job_seekers->relegion != null && $job_seekers->relegion == 'Lainnya' || old('relegion') == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
                                 </select>
-                                @if ($errors->first('religion') != null)
+                                @if ($errors->first('relegion') != null)
                                     <div class="invalid-feedback">
-                                        {{ $errors->first('religion') }}
+                                        {{ $errors->first('relegion') }}
                                     </div>
                                 @endif
                             </div>
@@ -248,11 +250,11 @@
                                             class="form-control {{ $errors->first('sim') != null ? 'is-invalid' : '' }}"
                                             required>
                                             <option value="">--Select SIM--</option>
-                                            <option value="A">A</option>
-                                            <option value="B1">B1</option>
-                                            <option value="B2">B2</option>
-                                            <option value="C">C</option>
-                                            <option value="D">D</option>
+                                            <option value="A" {{ isset($job_seekers) && $job_seekers->sim != null && $job_seekers->sim == 'A' || old('sim') == 'A' ? 'selected' : '' }}>A</option>
+                                            <option value="B1" {{ isset($job_seekers) && $job_seekers->sim != null && $job_seekers->sim == 'B1' || old('sim') == 'B1' ? 'selected' : '' }}>B1</option>
+                                            <option value="B2" {{ isset($job_seekers) && $job_seekers->sim != null && $job_seekers->sim == 'B2' || old('sim') == 'B2' ? 'selected' : '' }}>B2</option>
+                                            <option value="C" {{ isset($job_seekers) && $job_seekers->sim != null && $job_seekers->sim == 'C' || old('sim') == 'C' ? 'selected' : '' }}>C</option>
+                                            <option value="D" {{ isset($job_seekers) && $job_seekers->sim != null && $job_seekers->sim == 'D' || old('sim') == 'D' ? 'selected' : '' }}>D</option>
                                         </select>
                                         @if ($errors->first('sim') != null)
                                             <div class="invalid-feedback">
@@ -288,11 +290,17 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="jobseeker_cv">Curiculum Vitae</label>
-                                <input type="file" name="jobseeker_cv" id="jobseeker_cv"
-                                    class="form-control form-input {{ $errors->first('jobseeker_cv') != null ? 'is-invalid' : '' }}">
-                                @if ($errors->first('jobseeker_cv') != null)
+                                @if (isset($job_seekers) && $job_seekers->jobseeker_cv != '-')
+                                    <span class="badge bg-primary form-control m-2 p-2">
+                                        View Old CV <a href="{{asset('uploads/' . $job_seekers->jobseeker_cv)}}" target="_blank">here</a>
+                                    </span>
+                                @endif
+                                <input type="file" accept=".pdf" name="cv" id="jobseeker_cv"
+                                    class="form-control form-input {{ $errors->first('cv') != null ? 'is-invalid' : '' }}">
+                                    <small><i>Type File : PDF</i></small>
+                                @if ($errors->first('cv') != null)
                                     <div class="invalid-feedback">
-                                        {{ $errors->first('jobseeker_cv') }}
+                                        {{ $errors->first('cv') }}
                                     </div>
                                 @endif
                             </div>

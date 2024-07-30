@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\User; 
 
 use App\Http\Controllers\Controller;
 use App\Models\JobSeekers;
@@ -22,8 +22,6 @@ class PersonalDataController extends Controller
     }
     public function update(Request $request){
         $validate = Validator::make($request->all(),[
-            'jobseeker_image' => ['required'],
-            'jobseeker_cv' => ['required'],
             'nik'=> ['required'],
             'name'=> ['required'],
             'date_birth'=> ['required'],
@@ -37,18 +35,39 @@ class PersonalDataController extends Controller
             'married_status'=> ['required'],
             'citizen'=> ['required'],
             'relegion'=> ['required'],
-            'npwp',
-            'sim',
-            'sim_number',
         ]);
         if($validate->fails()){
-            return redirect()->back()->withErrors($validate)->withInput();
+            dd($validate);
+            //return redirect()->back()->withErrors($validate)->withInput();
         }
         $check = JobSeekers::where('user_id',auth()->user()->id)->first();
-        if(!$check){
-            return JobSeekers::insertData($request,[],null,true) ? redirect()->route('personal_data')->with('sukses',"Update Personal Data Successfully") : redirect()->back()->with('eror',"Update Personal data Failed, Please Try Again") ;
+        $jobseekers_image = $request->file('foto');
+        $jobseekers_cv = $request->file('cv');
+        $request['jobseeker_image'] = '-';
+        $request['jobseeker_cv'] = '-';
+        if($check){
+            $request['jobseeker_image'] = $check->jobseeker_image;
+            $request['jobseeker_cv'] = $check->jobseeker_cv;
         }
-        return JobSeekers::updateData($check->id,$request) ? redirect()->route('personal_data')->with('sukses',"Update Personal Data Successfully") : redirect()->back()->with('eror',"Update Personal data Failed, Please Try Again") ;
+        if($request->hasFile('foto')){
+            $img = date('Ymdhis').$jobseekers_image->getClientOriginalName();
+            $jobseekers_image->move($this->defaultUploadFileDir,$img);
+            $request['jobseeker_image'] = $img;
+            if($check){
+                
+            }
+        }
+        
+        if($request->hasFile('cv')){
+            $cv = date('Ymdhis').$jobseekers_cv->getClientOriginalName();
+            $jobseekers_cv->move($this->defaultUploadFileDir,$cv);
+            $request['jobseeker_cv'] = $cv;
+        }
+        if(!$check){
+            return JobSeekers::insertData($request,['foto','cv'],null,true) ? redirect()->route('personal_data')->with('sukses',"Update Personal Data Successfully") : redirect()->back()->with('eror',"Update Personal data Failed, Please Try Again") ;
+        }
+        
+        return JobSeekers::updateData($check->id,$request,['foto','cv']) ? redirect()->route('personal_data')->with('sukses',"Update Personal Data Successfully") : redirect()->back()->with('eror',"Update Personal data Failed, Please Try Again") ;
         
     }
 }
