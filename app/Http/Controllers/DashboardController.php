@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\ApplyJobs;
 use App\Models\User;
 use Hash;
 use Illuminate\Http\Request;
@@ -10,12 +11,38 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
     
-    public function __construct(){
-     
-    }
     public function index(){
         $data = $this->getPageData();
-        return view('pages.admin.dashboard',compact(['data']));
+        if(auth()->user()->role == 'Admin'){
+            return view('pages.admin.dashboard',compact(['data']));
+        }
+        if(auth()->user()->role == 'User'){
+            $apply = ApplyJobs::where('user_id','=',auth()->user()->id)->latest()->get();
+            $apply_job = $apply->count();
+            $wait = 0;
+            $pass = 0;
+            $failed = 0;
+            foreach($apply as $a){
+                switch ($a->status_apply) {
+                    case 0:
+                        $wait++;
+                        break;
+                    case 1:
+                        $pass++;
+                        break;
+                    case 2:
+                        $failed++;
+                        break;
+                    
+                    default:
+                        # code...
+                        break;
+                }
+            }
+            return view('pages.user.dashboard',compact(['data','wait','pass','failed','apply_job']));
+        }
+
+        
     }
     public function profile(){
         $data = $this->getPageData();

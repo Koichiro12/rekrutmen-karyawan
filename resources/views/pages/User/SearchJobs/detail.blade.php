@@ -62,12 +62,23 @@
                             @break
 
                             @case(1)
-                                <form action="{{ route('apply', $job->id) }}" method="POST" enctype="multipart/form-data">
-                                    @method('POST')
-                                    @csrf
-                                    <button type="submit" class="btn btn-sm btn-success form-confirm">Apply Job</button>
+                                @php
+                                    $isApplied = false;
+                                    if ($apply_job != null) {
+                                        $isApplied = true;
+                                    }
+                                @endphp
+                                @if (!$isApplied)
+                                    <form action="{{ route('apply', $job->id) }}" method="POST" enctype="multipart/form-data">
+                                        @method('POST')
+                                        @csrf
+                                        <button type="submit" class="btn btn-sm btn-success form-confirm">Apply Job</button>
+                                        <a href="{{ route('search_job') }}" class="btn btn-sm btn-danger">Back</a>
+                                    </form>
+                                @else
+                                    <a href="{{ route('apply_job') }}" class="btn btn-sm btn-primary">View My Apply</a>
                                     <a href="{{ route('search_job') }}" class="btn btn-sm btn-danger">Back</a>
-                                </form>
+                                @endif
                             @break
                         @endswitch
                     </div>
