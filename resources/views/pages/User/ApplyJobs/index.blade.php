@@ -52,6 +52,14 @@
                                                         <span class="badge bg-danger">Failed Selection</span>
                                                     @break
 
+                                                    @case(3)
+                                                        <span class="badge bg-primary">Hired</span>
+                                                    @break
+
+                                                    @case(4)
+                                                        <span class="badge bg-danger">Fail</span>
+                                                    @break
+
                                                     @default
                                                 @endswitch
                                                 <br>
@@ -61,8 +69,56 @@
                                                         class="text-primary">{{ number_format($item->salary) }}</span></small>
                                                 <hr>
                                                 @if ($item->status_apply == 1)
-                                                    <a href="#" class="btn btn-sm btn-light">Test</a>
-                                                    <a href="#" class="btn btn-sm btn-dark">Psikotest</a>
+                                                    @if ($item->test_result != '-')
+                                                        @switch($item->test_status)
+                                                            @case(0)
+                                                                Test Status : <span class="badge bg-danger">Not Yet</span>
+                                                            @break
+
+                                                            @case(1)
+                                                                Test Status : <span class="badge bg-warning">Waiting</span>
+                                                            @break
+
+                                                            @case(2)
+                                                                Test Status :<span class="badge bg-success">Pass</span>
+                                                            @break
+
+                                                            @case(3)
+                                                                Test Status :<span class="badge bg-success">Failed</span>
+                                                            @break
+
+                                                            @default
+                                                        @endswitch
+                                                    @else
+                                                        <a href="{{ route('apply_test', $item->id) }}"
+                                                            class="btn btn-sm btn-light">Test</a>
+                                                    @endif
+                                                    <br>
+                                                    <br>
+                                                    @if ($item->psikotes_result != '-')
+                                                        @switch($item->psikotes_status)
+                                                            @case(0)
+                                                                Psikotes Status : <span class="badge bg-danger">Not Yet</span>
+                                                            @break
+
+                                                            @case(1)
+                                                                Psikotes Status : <span class="badge bg-warning">Waiting</span>
+                                                            @break
+
+                                                            @case(2)
+                                                                Psikotes Status :<span class="badge bg-success">Pass</span>
+                                                            @break
+
+                                                            @case(3)
+                                                                Psikotes Status :<span class="badge bg-success">Failed</span>
+                                                            @break
+
+                                                            @default
+                                                        @endswitch
+                                                    @else
+                                                        <a href="{{ route('apply_psikotest', $item->id) }}"
+                                                            class="btn btn-sm btn-dark">Psikotest</a>
+                                                    @endif
                                                 @endif
                                             </td>
                                         </tr>

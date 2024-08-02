@@ -17,7 +17,9 @@ return new class extends Migration
             $table->bigInteger('jobseeker_id');
             $table->bigInteger('job_id');
             $table->string('test_result');
+            $table->string('test_status')->default('0');
             $table->string('psikotes_result');
+            $table->string('psikotes_status')->default('0');
             $table->string('status_apply');
             $table->date('date_apply');
             $table->timestamps();

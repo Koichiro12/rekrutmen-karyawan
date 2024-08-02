@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\ApplyJobs;
 use App\Models\Job;
 use App\Models\JobSeekers;
+use App\Models\Psikotes;
+use App\Models\Test;
+use App\Models\UserPsikotestAnswer;
+use App\Models\UserTestAnswer;
 use Illuminate\Http\Request;
 
 class JobseekersController extends Controller
@@ -59,7 +63,87 @@ class JobseekersController extends Controller
         $data['page_name'] = 'My Apply Jobs';
         $data['page_subname'] = 'Apply Jobs data will appear here';
         $data['page_breadcum'] = array_merge($data['page_breadcum'],[['name' => 'My Apply Jobs','link' => route('apply_job'),'status' => 'active']]);
-        $apply_job = ApplyJobs::join('jobs','apply_jobs.job_id','=','jobs.id')->where('apply_jobs.user_id','=',$id)->orderBy('apply_jobs.created_at','DESC')->get();
+        $apply_job = ApplyJobs::join('jobs','apply_jobs.job_id','=','jobs.id')
+                        ->join('departements','jobs.departement_id','=','departements.id')
+                        ->join('positions','jobs.position_id','=','positions.id')
+                        ->where('apply_jobs.user_id','=',$id)
+                        ->orderBy('apply_jobs.created_at','DESC')->get(['apply_jobs.*','departements.departement','positions.position','jobs.job_name','jobs.salary']);
         return view('pages.user.applyjobs.index',compact(['data','apply_job']));
+    }
+
+    public function apply_test(string $id){
+        $data = $this->getPageData();
+        $data_apply = ApplyJobs::findOrFail($id);
+        if(!$data_apply){
+            return redirect()->back()->with('eror',"Apply Job Error, Please Contact Support") ;
+        }
+        $data['page_name'] = 'Job Test';
+        $data['page_subname'] = 'Job Test will appear here';
+        $data['page_breadcum'] = array_merge($data['page_breadcum'],[['name' => 'Job Test','link' => route('apply_test',$id),'status' => 'active']]);
+        $test = Test::where('jobs_id','=',$data_apply->job_id)->get();
+        return view('pages.user.applyjobs.test.index',compact(['data','test','id']));
+    }
+
+    public function submit_apply_test(Request $request,string $id){
+        $exception = [];
+        $truth = 0;
+        $scores = 0;
+        $data_apply = ApplyJobs::findOrFail($id);
+        $test = Test::where('jobs_id','=',$data_apply->job_id)->get();
+        //Push Exception for request insert data
+        foreach($test as $s){
+            array_push($exception,'oq_'.$s->id);
+        }
+        // Looping data and inserting data to database
+        foreach($test as $t){
+            $request['oq_'.$t->id] == $t->answer ? $truth++ : null;
+            $request['apply_job_id'] = $id;
+            $request['test_id'] = $t->id ;
+            $request['answer_test'] = $t->answer;
+            $request['user_answer'] = $request['oq_'.$t->id];
+            UserTestAnswer::insertData($request,$exception);
+        }
+        $scores = ($truth / $test->count()) * 100;
+        return ApplyJobs::where('id','=',$id)->update(['test_result' => $scores,'test_status' => '1']) 
+        ? redirect()->route('apply_job')->with('sukses',"Test Submited Successfully") 
+        : redirect()->back()->with('eror',"Oops Something Went Wrong, Please Try Again") ;
+    }
+
+    public function apply_psikotest(string $id){
+        $data = $this->getPageData();
+        $data_apply = ApplyJobs::findOrFail($id);
+        if(!$data_apply){
+            return redirect()->back()->with('eror',"Apply Job Error, Please Contact Support") ;
+        }
+        $data['page_name'] = 'Job Psikotest';
+        $data['page_subname'] = 'Job Psikotest will appear here';
+        $data['page_breadcum'] = array_merge($data['page_breadcum'],[['name' => 'Job Psikotest','link' => route('apply_test',$id),'status' => 'active']]);
+        $psikotest = Psikotes::where('jobs_id','=',$data_apply->job_id)->get();
+        return view('pages.user.applyjobs.psikotest.index',compact(['data','psikotest','id']));
+    }
+
+    public function submit_apply_psikotest(Request $request,string $id){
+        $exception = [];
+        $truth = 0;
+        $scores = 0;
+        $data_apply = ApplyJobs::findOrFail($id);
+        $test = Psikotes::where('jobs_id','=',$data_apply->job_id)->get();
+        //Push Exception for request insert data
+        foreach($test as $s){
+            array_push($exception,'oq_'.$s->id);
+        }
+        // Looping data and inserting data to database
+        foreach($test as $t){
+            $request['oq_'.$t->id] == $t->answer ? $truth++ : null;
+            $request['apply_job_id'] = $id;
+            $request['test_id'] = $t->id ;
+            $request['answer_test'] = $t->answer;
+            $request['user_answer'] = $request['oq_'.$t->id];
+            UserPsikotestAnswer::insertData($request,$exception);
+        }
+        $scores = ($truth / $test->count()) * 100;
+        return ApplyJobs::where('id','=',$id)->update(['psikotes_result' => $scores,'psikotes_status' => '1']) 
+        ? redirect()->route('apply_job')->with('sukses',"Psikotest Submited Successfully") 
+        : redirect()->back()->with('eror',"Oops Something Went Wrong, Please Try Again") ;
     }
 }
