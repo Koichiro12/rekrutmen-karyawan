@@ -40,7 +40,7 @@
                                             <td>{{ date_format(date_create($item->date_apply), 'd M,Y') }}</td>
                                             <td>{{ $item->job_name }} <br>
                                                 <small>{{ date_format(date_create($item->open_date), 'd M,Y') }} -
-                                                    {{ date_format(date_create($item->Dclose_date), 'd M,Y') }}</small>
+                                                    {{ date_format(date_create($item->close_date), 'd M,Y') }}</small>
                                                 <br>
                                                 <small>Departement : {{ $item->departement }}</small><br>
                                                 <small>Poisition : {{ $item->position }}</small>
@@ -108,7 +108,7 @@
                                                 @endswitch
                                             </td>
                                             <td>
-                                                <a href="#" class="btn btn-sm btn-primary">Detail</a>
+                                                <a href="{{route('jobseeker_detail',$item->id_apply)}}" class="btn btn-sm btn-primary">Detail</a>
                                             </td>
                                         </tr>
                                     @endforeach

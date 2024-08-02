@@ -57,6 +57,7 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
         Route::delete('/jobs/psikotest/{id}/delete', [LowonganController::class, 'destroy_psikotest'])->name('delete_psikotest');
         
         Route::get('/jobseekers', [JobSeekersController::class, 'index'])->name('jobseekers');
+        Route::get('/jobseekers/{id}/detail', [JobSeekersController::class, 'detail'])->name('jobseeker_detail');
         Route::resource('users',UsersController::class);
     });
     Route::group(['middleware' => ['role:User']], function () {
