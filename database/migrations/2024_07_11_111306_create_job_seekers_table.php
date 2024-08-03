@@ -33,6 +33,7 @@ return new class extends Migration
             $table->string('npwp')->nullable();
             $table->string('sim')->nullable();
             $table->string('sim_number')->nullable();
+            $table->string('can_apply_job')->default('-');
             $table->timestamps();
         });
     }

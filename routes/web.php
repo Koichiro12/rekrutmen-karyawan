@@ -58,6 +58,20 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
         
         Route::get('/jobseekers', [JobSeekersController::class, 'index'])->name('jobseekers');
         Route::get('/jobseekers/{id}/detail', [JobSeekersController::class, 'detail'])->name('jobseeker_detail');
+
+        Route::get('/jobseekers/{id}/selection/pass', [JobSeekersController::class, 'selection_pass'])->name('pass_selection');
+        Route::get('/jobseekers/{id}/selection/fail', [JobSeekersController::class, 'selection_fail'])->name('fail_selection');
+       
+        Route::get('/jobseekers/{id}/job/hired', [JobSeekersController::class, 'hired'])->name('hired');
+        Route::get('/jobseekers/{id}/job/not_recruit', [JobSeekersController::class, 'not_recruit'])->name('not_recruit');
+       
+
+        Route::get('/jobseekers/{id}/test/pass', [JobSeekersController::class, 'test_pass'])->name('pass_test');
+        Route::get('/jobseekers/{id}/test/fail', [JobSeekersController::class, 'test_fail'])->name('fail_test');
+
+        Route::get('/jobseekers/{id}/psikotest/pass', [JobSeekersController::class, 'psikotest_pass'])->name('pass_psikotest');
+        Route::get('/jobseekers/{id}/psikotest/fail', [JobSeekersController::class, 'psikotest_fail'])->name('fail_psikotest');
+
         Route::resource('users',UsersController::class);
     });
     Route::group(['middleware' => ['role:User']], function () {

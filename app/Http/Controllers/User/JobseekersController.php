@@ -23,7 +23,8 @@ class JobseekersController extends Controller
         $data['page_breadcum'] = array_merge($data['page_breadcum'],[['name' => 'Search Jobs','link' => route('search_job'),'status' => 'active']]);
         $jobs = Job::join('departements','jobs.departement_id','=','departements.id')->join('positions','jobs.position_id','=','positions.id')->orderBy('jobs.created_at','DESC')->get(['positions.position','departements.departement','jobs.*']);
         $apply_job = ApplyJobs::where('user_id','=',auth()->user()->id)->latest()->get();
-        return view('pages.user.searchjobs.index',compact(['data','jobs','apply_job']));
+        $jobseekers = JobSeekers::where('user_id','=',auth()->user()->id)->first();
+        return view('pages.user.searchjobs.index',compact(['data','jobs','apply_job','jobseekers']));
     }
     public function detail(string $id){
         $data = $this->getPageData();
@@ -32,7 +33,8 @@ class JobseekersController extends Controller
         $data['page_breadcum'] = array_merge($data['page_breadcum'],[['name' => 'Detail Job','link' => route('detail_job',$id),'status' => 'active']]);
         $job = Job::join('departements','jobs.departement_id','=','departements.id')->join('positions','jobs.position_id','=','positions.id')->where('jobs.id','=',$id)->first();
         $apply_job = ApplyJobs::where([['job_id','=',$id],['user_id','=',auth()->user()->id]])->first();
-        return view('pages.user.searchjobs.detail',compact(['data','job','apply_job']));
+        $jobseekers = JobSeekers::where('user_id','=',auth()->user()->id)->first();
+        return view('pages.user.searchjobs.detail',compact(['data','job','apply_job','jobseekers']));
     }
 
     public function apply(Request $request,string $id){

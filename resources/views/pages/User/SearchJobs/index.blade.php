@@ -13,6 +13,13 @@
                         {{ session('sukses') }}
                     </div>
                 @endif
+                @if (isset($jobseekers) && $jobseekers != null)
+                    @if ($jobseekers->can_apply_job != '-' && date('Y-m-d') <= date_format(date_create($jobseekers->can_apply_job), 'Y-m-d'))
+                        <div class="alert alert-danger">
+                            {!! 'Attention ! You can reapply for work on or after the date <b> '.date_format(date_create($jobseekers->can_apply_job), 'd M,Y').'</b>' !!}
+                        </div>
+                    @endif
+                @endif
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">
@@ -39,6 +46,9 @@
                                                 <h1>
                                                     {{ $item->job_name }}
                                                 </h1>
+                                                <small>{{ date_format(date_create($item->open_date), 'd M Y') }} s/d
+                                                    {{ date_format(date_create($item->close_date), 'd M Y') }}</small>
+                                                <hr>
                                                 @switch($item->status)
                                                     @case(0)
                                                         <span class="badge bg-danger">Closed</span>
@@ -65,29 +75,51 @@
                                                     @case(1)
                                                         @php
                                                             $isApplied = false;
+                                                            $isAppliedStatus = 0;
                                                             foreach ($apply_job as $aj) {
                                                                 if ($aj->job_id == $item->id) {
                                                                     $isApplied = true;
+                                                                    $isAppliedStatus = $aj->status_apply;
                                                                     break;
                                                                 }
                                                             }
+
                                                         @endphp
-                                                        @if (!$isApplied)
-                                                            <form action="{{ route('apply', $item->id) }}" method="POST"
-                                                                enctype="multipart/form-data">
-                                                                @method('POST')
-                                                                @csrf
-                                                                <button type="submit"
-                                                                    class="btn btn-sm btn-success form-confirm">Apply
-                                                                    Job</button>
-                                                                <a href="{{ route('detail_job', $item->id) }}"
-                                                                    class="btn btn-sm btn-light">Read More..</a>
-                                                            </form>
-                                                        @else
-                                                        <a href="{{ route('apply_job') }}"
-                                                            class="btn btn-sm btn-primary">View My Apply</a>
+                                                        @if (isset($jobseekers) && $jobseekers != null)
+                                                            @if ($jobseekers->can_apply_job == '-' || date('Y-m-d') >= date_format(date_create($jobseekers->can_apply_job), 'Y-m-d'))
+                                                                @if (!$isApplied)
+                                                                    <form action="{{ route('apply', $item->id) }}" method="POST"
+                                                                        enctype="multipart/form-data">
+                                                                        @method('POST')
+                                                                        @csrf
+                                                                        <button type="submit"
+                                                                            class="btn btn-sm btn-success form-confirm">Apply
+                                                                            Job</button>
+                                                                        <a href="{{ route('detail_job', $item->id) }}"
+                                                                            class="btn btn-sm btn-light">Read More..</a>
+                                                                    </form>
+                                                                @elseif(($isApplied && $isAppliedStatus == 4) || $isAppliedStatus == 2)
+                                                                    <form action="{{ route('apply', $item->id) }}" method="POST"
+                                                                        enctype="multipart/form-data">
+                                                                        @method('POST')
+                                                                        @csrf
+                                                                        <button type="submit"
+                                                                            class="btn btn-sm btn-success form-confirm">Apply
+                                                                            Job</button>
+                                                                        <a href="{{ route('detail_job', $item->id) }}"
+                                                                            class="btn btn-sm btn-light">Read More.. </a>
+                                                                    </form>
+                                                                @else
+                                                                    <a href="{{ route('apply_job') }}"
+                                                                        class="btn btn-sm btn-primary">View
+                                                                        My Apply</a>
+                                                                    <a href="{{ route('detail_job', $item->id) }}"
+                                                                        class="btn btn-sm btn-light">ReadMore..</a>
+                                                                @endif
+                                                            @else
                                                             <a href="{{ route('detail_job', $item->id) }}"
-                                                                class="btn btn-sm btn-light">ReadMore..</a>
+                                                                class="btn btn-sm btn-light">Read More..</a>
+                                                            @endif
                                                         @endif
                                                     @break
 

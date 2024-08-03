@@ -53,15 +53,23 @@
                                             <td>
                                                 @switch($item->status_apply)
                                                     @case(0)
-                                                        Status Selection : <span class="badge bg-warning">Waiting</span>
+                                                        Status : <span class="badge bg-warning">Waiting</span>
                                                     @break
 
                                                     @case(1)
-                                                        Status Selection : <span class="badge bg-success">Pass Selection</span>
+                                                        Status : <span class="badge bg-success">Pass Selection</span>
                                                     @break
 
                                                     @case(2)
-                                                        Status Selection :<span class="badge bg-danger">Failed Selection</span>
+                                                        Status :<span class="badge bg-danger">Failed Selection</span>
+                                                    @break
+
+                                                    @case(3)
+                                                        Status : <span class="badge bg-success">Hired</span>
+                                                    @break
+
+                                                    @case(4)
+                                                        Status :<span class="badge bg-danger">Not Recruit</span>
                                                     @break
 
                                                     @default
@@ -108,7 +116,8 @@
                                                 @endswitch
                                             </td>
                                             <td>
-                                                <a href="{{route('jobseeker_detail',$item->id_apply)}}" class="btn btn-sm btn-primary">Detail</a>
+                                                <a href="{{ route('jobseeker_detail', $item->id_apply) }}"
+                                                    class="btn btn-sm btn-primary">Detail</a>
                                             </td>
                                         </tr>
                                     @endforeach

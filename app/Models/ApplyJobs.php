@@ -21,6 +21,7 @@ class ApplyJobs extends AppModel
         'psikotes_status',
         'status_apply',
         'date_apply',
+        'can_apply_job',
         'created_at',
         'updated_at'
     ];

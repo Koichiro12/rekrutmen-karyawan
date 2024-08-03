@@ -13,6 +13,15 @@
                         {{ session('sukses') }}
                     </div>
                 @endif
+                @if (isset($jobseekers) && $jobseekers != null)
+                    @if ($jobseekers->can_apply_job != '-' && date('Y-m-d') <= date_format(date_create($jobseekers->can_apply_job), 'Y-m-d'))
+                        <div class="alert alert-danger">
+                            {!! 'Attention ! You can reapply for work on or after the date <b> ' .
+                                date_format(date_create($jobseekers->can_apply_job), 'd M,Y') .
+                                '</b>' !!}
+                        </div>
+                    @endif
+                @endif
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">
@@ -68,18 +77,27 @@
                                         $isApplied = true;
                                     }
                                 @endphp
-                                @if (!$isApplied)
-                                    <form action="{{ route('apply', $job->id) }}" method="POST" enctype="multipart/form-data">
-                                        @method('POST')
-                                        @csrf
-                                        <button type="submit" class="btn btn-sm btn-success form-confirm">Apply Job</button>
-                                        <a href="{{ route('search_job') }}" class="btn btn-sm btn-danger">Back</a>
-                                    </form>
-                                @else
-                                    <a href="{{ route('apply_job') }}" class="btn btn-sm btn-primary">View My Apply</a>
-                                    <a href="{{ route('search_job') }}" class="btn btn-sm btn-danger">Back</a>
+                                @if (isset($jobseekers) && $jobseekers != null)
+                                    @if ($jobseekers->can_apply_job == '-' || date('Y-m-d') >= date_format(date_create($jobseekers->can_apply_job), 'Y-m-d'))
+                                        @if (!$isApplied)
+                                            <form action="{{ route('apply', $job->id) }}" method="POST"
+                                                enctype="multipart/form-data">
+                                                @method('POST')
+                                                @csrf
+                                                <button type="submit" class="btn btn-sm btn-success form-confirm">Apply
+                                                    Job</button>
+                                                <a href="{{ route('search_job') }}" class="btn btn-sm btn-danger">Back</a>
+                                            </form>
+                                        @else
+                                            <a href="{{ route('apply_job') }}" class="btn btn-sm btn-primary">View My Apply</a>
+                                            <a href="{{ route('search_job') }}" class="btn btn-sm btn-danger">Back</a>
+                                        @endif
+                                    @else
+                                        <a href="{{ route('detail_job', $item->id) }}" class="btn btn-sm btn-light">Read More..</a>
+                                    @endif
                                 @endif
                             @break
+
                         @endswitch
                     </div>
                 </div>

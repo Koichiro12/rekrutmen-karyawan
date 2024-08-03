@@ -14,7 +14,29 @@ class DashboardController extends Controller
     public function index(){
         $data = $this->getPageData();
         if(auth()->user()->role == 'Admin'){
-            return view('pages.admin.dashboard',compact(['data']));
+            $apply = ApplyJobs::latest()->get();
+            $apply_job = $apply->count();
+            $wait = 0;
+            $pass = 0;
+            $failed = 0;
+            foreach($apply as $a){
+                switch ($a->status_apply) {
+                    case 0:
+                        $wait++;
+                        break;
+                    case 1:
+                        $pass++;
+                        break;
+                    case 2:
+                        $failed++;
+                        break;
+                    
+                    default:
+                        # code...
+                        break;
+                }
+            }
+            return view('pages.admin.dashboard',compact(['data','apply','wait','pass','failed','apply_job']));
         }
         if(auth()->user()->role == 'User'){
             $apply = ApplyJobs::where('user_id','=',auth()->user()->id)->latest()->get();
