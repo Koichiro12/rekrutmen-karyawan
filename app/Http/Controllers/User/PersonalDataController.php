@@ -53,9 +53,7 @@ class PersonalDataController extends Controller
             $img = date('Ymdhis').$jobseekers_image->getClientOriginalName();
             $jobseekers_image->move($this->defaultUploadFileDir,$img);
             $request['jobseeker_image'] = $img;
-            if($check){
-                
-            }
+            
         }
         
         if($request->hasFile('cv')){
@@ -64,6 +62,10 @@ class PersonalDataController extends Controller
             $request['jobseeker_cv'] = $cv;
         }
         if(!$check){
+            $check_nik = JobSeekers::where('nik','=',$request['nik'])->first();
+            if($check_nik){
+                return redirect()->route('personal_data')->with('eror',"Sorry, your identity number (NIK) has already been registered");
+            }
             return JobSeekers::insertData($request,['foto','cv'],null,true) ? redirect()->route('personal_data')->with('sukses',"Update Personal Data Successfully") : redirect()->back()->with('eror',"Update Personal data Failed, Please Try Again") ;
         }
         
