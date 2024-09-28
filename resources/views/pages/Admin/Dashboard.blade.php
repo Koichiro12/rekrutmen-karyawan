@@ -4,7 +4,7 @@
         <div class="col-12 col-lg-9">
             <div class="row">
                 <div class="col-6 col-lg-3 col-md-6">
-                    <div class="card">
+                    <a href="{{route('jobseekers_with_status',1)}}"  class="card">
                         <div class="card-body px-4 py-4-5">
                             <div class="row">
                                 <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
@@ -13,15 +13,15 @@
                                     </div>
                                 </div>
                                 <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                    <h6 class="text-muted font-semibold">New</h6>
+                                    <h6 class="text-muted font-semibold">Pelamar Baru</h6>
                                     <h6 class="font-extrabold mb-0">{{ $wait }}</h6>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-6 col-lg-3 col-md-6">
-                    <div class="card">
+                    <a href="{{route('jobseekers_with_status',2)}}" class="card">
                         <div class="card-body px-4 py-4-5">
                             <div class="row">
                                 <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
@@ -30,15 +30,15 @@
                                     </div>
                                 </div>
                                 <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                    <h6 class="text-muted font-semibold">Proccess</h6>
+                                    <h6 class="text-muted font-semibold">Proses</h6>
                                     <h6 class="font-extrabold mb-0">{{ $proses }}</h6>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-6 col-lg-3 col-md-6">
-                    <div class="card">
+                    <a href="{{route('jobseekers_with_status',3)}}" class="card">
                         <div class="card-body px-4 py-4-5">
                             <div class="row">
                                 <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
@@ -47,15 +47,15 @@
                                     </div>
                                 </div>
                                 <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                    <h6 class="text-muted font-semibold">Hired</h6>
+                                    <h6 class="text-muted font-semibold">Diterima</h6>
                                     <h6 class="font-extrabold mb-0">{{ $pass }}</h6>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-6 col-lg-3 col-md-6">
-                    <div class="card">
+                    <a href="{{route('jobseekers_with_status',4)}}" class="card">
                         <div class="card-body px-4 py-4-5">
                             <div class="row">
                                 <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
@@ -64,12 +64,12 @@
                                     </div>
                                 </div>
                                 <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                    <h6 class="text-muted font-semibold">Decline / Cancel</h6>
+                                    <h6 class="text-muted font-semibold">Gagal</h6>
                                     <h6 class="font-extrabold mb-0">{{ $failed }}</h6>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
 

@@ -57,6 +57,7 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
         Route::delete('/jobs/psikotest/{id}/delete', [LowonganController::class, 'destroy_psikotest'])->name('delete_psikotest');
         
         Route::get('/jobseekers', [JobSeekersController::class, 'index'])->name('jobseekers');
+        Route::get('/jobseekers/{status}/list', [JobSeekersController::class, 'jobseekersWithStatus'])->name('jobseekers_with_status');
         Route::get('/jobseekers/{id}/detail', [JobSeekersController::class, 'detail'])->name('jobseeker_detail');
 
         Route::get('/jobseekers/{id}/selection/pass', [JobSeekersController::class, 'selection_pass'])->name('pass_selection');

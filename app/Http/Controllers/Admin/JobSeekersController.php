@@ -30,6 +30,60 @@ class JobSeekersController extends Controller
                         ->get(['apply_jobs.*','jobs.*','departements.departement','positions.position','job_seekers.*','apply_jobs.id as id_apply']);
         return view('pages.admin.jobseekers.index',compact(['data','jobseekers']));
     }
+    public function jobseekersWithStatus(string $status){
+       
+        $data = $this->getPageData();
+        $data['page_name'] = 'JobSeekers';
+        $data['page_subname'] = 'JobSeekers data will appear here';
+        $data['page_breadcum'] = array_merge($data['page_breadcum'],[['name' => 'JobSeekers','link' => route('jobseekers'),'status' => 'active']]);
+        $jobseekers = ApplyJobs::join('jobs','apply_jobs.job_id','=','jobs.id')
+        ->join('job_seekers','apply_jobs.jobseeker_id','=','job_seekers.id')
+        ->join('departements','jobs.departement_id','=','departements.id')
+        ->join('positions','jobs.position_id','=','positions.id')
+        ->where('apply_jobs.status_apply','=','0')
+        ->orderBy('apply_jobs.created_at','DESC')
+        ->get(['apply_jobs.*','jobs.*','departements.departement','positions.position','job_seekers.*','apply_jobs.id as id_apply']);
+        switch($status){
+            case 1:
+                $jobseekers = ApplyJobs::join('jobs','apply_jobs.job_id','=','jobs.id')
+                ->join('job_seekers','apply_jobs.jobseeker_id','=','job_seekers.id')
+                ->join('departements','jobs.departement_id','=','departements.id')
+                ->join('positions','jobs.position_id','=','positions.id')
+                ->where('apply_jobs.status_apply','=','0')
+                ->orderBy('apply_jobs.created_at','DESC')
+                ->get(['apply_jobs.*','jobs.*','departements.departement','positions.position','job_seekers.*','apply_jobs.id as id_apply']);
+                break;
+             case 2:
+                $jobseekers = ApplyJobs::join('jobs','apply_jobs.job_id','=','jobs.id')
+                ->join('job_seekers','apply_jobs.jobseeker_id','=','job_seekers.id')
+                ->join('departements','jobs.departement_id','=','departements.id')
+                ->join('positions','jobs.position_id','=','positions.id')
+                ->where('apply_jobs.status_apply','=','1')
+                ->orderBy('apply_jobs.created_at','DESC')
+                ->get(['apply_jobs.*','jobs.*','departements.departement','positions.position','job_seekers.*','apply_jobs.id as id_apply']);
+                break;
+             case 3:
+                $jobseekers = ApplyJobs::join('jobs','apply_jobs.job_id','=','jobs.id')
+                ->join('job_seekers','apply_jobs.jobseeker_id','=','job_seekers.id')
+                ->join('departements','jobs.departement_id','=','departements.id')
+                ->join('positions','jobs.position_id','=','positions.id')
+                ->where('apply_jobs.status_apply','=','3')
+                ->orderBy('apply_jobs.created_at','DESC')
+                ->get(['apply_jobs.*','jobs.*','departements.departement','positions.position','job_seekers.*','apply_jobs.id as id_apply']);
+                break;
+             case 4:
+                $jobseekers = ApplyJobs::join('jobs','apply_jobs.job_id','=','jobs.id')
+                ->join('job_seekers','apply_jobs.jobseeker_id','=','job_seekers.id')
+                ->join('departements','jobs.departement_id','=','departements.id')
+                ->join('positions','jobs.position_id','=','positions.id')
+                ->whereNot([['apply_jobs.status_apply','=','0'],['apply_jobs.status_apply','=','1'],['apply_jobs.status_apply','=','3']])
+                ->orderBy('apply_jobs.created_at','DESC')
+                ->get(['apply_jobs.*','jobs.*','departements.departement','positions.position','job_seekers.*','apply_jobs.id as id_apply']);
+                break;
+        }
+        
+        return view('pages.admin.jobseekers.index',compact(['data','jobseekers']));
+    }
     public function detail(string $id){
         $data = $this->getPageData();
         $data['page_name'] = 'JobSeeker Detail';
