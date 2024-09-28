@@ -42,7 +42,7 @@
                                                 @switch($item->status_apply)
                                                     @case(0)
                                                         <span class="badge bg-warning">Waiting Confirmation</span>
-                                                    @break
+                                                    @break 
 
                                                     @case(1)
                                                         <span class="badge bg-success">Pass Selection</span>
@@ -60,6 +60,10 @@
                                                         <span class="badge bg-danger">Fail</span>
                                                     @break
 
+                                                    @case(5)
+                                                        <span class="badge bg-danger">Cancel</span>
+                                                    @break
+
                                                     @default
                                                 @endswitch
                                                 <br>
@@ -68,6 +72,10 @@
                                                 <small>Salary : <span
                                                         class="text-primary">{{ number_format($item->salary) }}</span></small>
                                                 <hr>
+                                                @if ($item->status_apply == 0)
+                                                <a href="{{ route('cancel_apply', $item->id) }}"
+                                                    class="btn btn-sm btn-danger a-confirm">Cancel Apply</a>
+                                                @endif
                                                 @if ($item->status_apply == 1)
                                                     @if ($item->test_result != '-')
                                                         @switch($item->test_status)
@@ -119,6 +127,10 @@
                                                         <a href="{{ route('apply_psikotest', $item->id) }}"
                                                             class="btn btn-sm btn-dark">Psikotest</a>
                                                     @endif
+                                                @endif
+                                                @if ($item->status_apply == 5)
+                                                <a href="{{ route('hapus_apply', $item->id) }}"
+                                                    class="btn btn-sm btn-danger a-confirm">Hapus</a>
                                                 @endif
                                             </td>
                                         </tr>

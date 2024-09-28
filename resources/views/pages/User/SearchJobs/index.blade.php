@@ -98,7 +98,7 @@
                                                                         <a href="{{ route('detail_job', $item->id) }}"
                                                                             class="btn btn-sm btn-light">Read More..</a>
                                                                     </form>
-                                                                @elseif(($isApplied && $isAppliedStatus == 4) || $isAppliedStatus == 2)
+                                                                @elseif(($isApplied && $isAppliedStatus == 4) || $isAppliedStatus == 2 || $isAppliedStatus == 5)
                                                                     <form action="{{ route('apply', $item->id) }}" method="POST"
                                                                         enctype="multipart/form-data">
                                                                         @method('POST')

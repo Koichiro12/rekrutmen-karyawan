@@ -14,7 +14,7 @@
                                 </div>
                                 <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                     <h6 class="text-muted font-semibold">New</h6>
-                                    <h6 class="font-extrabold mb-0">0</h6>
+                                    <h6 class="font-extrabold mb-0">{{ $wait }}</h6>
                                 </div>
                             </div>
                         </div>
@@ -31,7 +31,7 @@
                                 </div>
                                 <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                     <h6 class="text-muted font-semibold">Proccess</h6>
-                                    <h6 class="font-extrabold mb-0">0</h6>
+                                    <h6 class="font-extrabold mb-0">{{ $proses }}</h6>
                                 </div>
                             </div>
                         </div>
@@ -48,7 +48,7 @@
                                 </div>
                                 <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                     <h6 class="text-muted font-semibold">Hired</h6>
-                                    <h6 class="font-extrabold mb-0">0</h6>
+                                    <h6 class="font-extrabold mb-0">{{ $pass }}</h6>
                                 </div>
                             </div>
                         </div>
@@ -65,14 +65,14 @@
                                 </div>
                                 <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                     <h6 class="text-muted font-semibold">Decline / Cancel</h6>
-                                    <h6 class="font-extrabold mb-0">0</h6>
+                                    <h6 class="font-extrabold mb-0">{{ $failed }}</h6>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-12 col-xl-12">
                     <div class="card">
@@ -89,7 +89,46 @@
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                    
+                                    <tbody>
+                                        @foreach ($applyjobs as $item)
+                                            <tr>
+                                                <td>{{ $loop->index + 1 }}</td>
+                                                <td>
+                                                    Name : {{ $item->name }} <br>
+                                                    Email : {{ $item->email }} <br>
+                                                    Phone : {{ $item->phone_number }} <br>
+                                                    @switch($item->status_apply)
+                                                        @case(0)
+                                                            Status : <span class="badge bg-warning">Waiting</span>
+                                                        @break
+
+                                                        @case(1)
+                                                            Status : <span class="badge bg-success">Pass Selection</span>
+                                                        @break
+
+                                                        @case(2)
+                                                            Status :<span class="badge bg-danger">Failed Selection</span>
+                                                        @break
+
+                                                        @case(3)
+                                                            Status : <span class="badge bg-success">Hired</span>
+                                                        @break
+
+                                                        @case(4)
+                                                            Status :<span class="badge bg-danger">Not Recruit</span>
+                                                        @break
+
+                                                        @default
+                                                    @endswitch
+
+                                                </td>
+                                                <td>
+                                                    <a href="{{ route('jobseeker_detail', $item->id_apply) }}"
+                                                        class="btn btn-sm btn-primary">Detail</a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
@@ -102,11 +141,12 @@
                 <div class="card-body py-4 px-4">
                     <div class="d-flex align-items-center">
                         <div class="avatar avatar-xl">
-                            <img src="{{auth()->user()->user_image != '-' ? asset('uploads/'.auth()->user()->user_image) : asset('/').'assets/compiled/jpg/5.jpg' }}" alt="Face 1">
+                            <img src="{{ auth()->user()->user_image != '-' ? asset('uploads/' . auth()->user()->user_image) : asset('/') . 'assets/compiled/jpg/5.jpg' }}"
+                                alt="Face 1">
                         </div>
                         <div class="ms-2 name">
-                            <p class="font-bold py-0 my-0">{{auth()->user()->name}}</p>
-                            <small class="text-muted mb-0">{{auth()->user()->role}}</small>
+                            <p class="font-bold py-0 my-0">{{ auth()->user()->name }}</p>
+                            <small class="text-muted mb-0">{{ auth()->user()->role }}</small>
                         </div>
                     </div>
                 </div>

@@ -88,6 +88,8 @@ Route::group(['middleware' => ['auth', 'prevent-back']], function () {
         Route::get('/search_job/{id}/detail', [\App\Http\Controllers\User\JobseekersController::class, 'detail'])->name('detail_job');
         
         Route::get('/my_apply_job', [\App\Http\Controllers\User\JobseekersController::class, 'apply_job'])->name('apply_job');
+        Route::get('/my_apply_job/{id}/cancel', [\App\Http\Controllers\User\JobseekersController::class, 'cancel_apply'])->name('cancel_apply');
+        Route::get('/my_apply_job/{id}/delete', [\App\Http\Controllers\User\JobseekersController::class, 'hapus_apply'])->name('hapus_apply');
         
         Route::get('/my_apply_job/{id}/test', [\App\Http\Controllers\User\JobseekersController::class, 'apply_test'])->name('apply_test');
         Route::post('/my_apply_job/{id}/test/submit', [\App\Http\Controllers\User\JobseekersController::class, 'submit_apply_test'])->name('submit_apply_test');

@@ -14,9 +14,16 @@ class DashboardController extends Controller
     public function index(){
         $data = $this->getPageData();
         if(auth()->user()->role == 'Admin'){
+            $applyjobs = ApplyJobs::join('jobs','apply_jobs.job_id','=','jobs.id')
+                        ->join('job_seekers','apply_jobs.jobseeker_id','=','job_seekers.id')
+                        ->join('departements','jobs.departement_id','=','departements.id')
+                        ->join('positions','jobs.position_id','=','positions.id')
+                        ->orderBy('apply_jobs.created_at','DESC')
+                        ->get(['apply_jobs.*','jobs.*','departements.departement','positions.position','job_seekers.*','apply_jobs.id as id_apply']);
             $apply = ApplyJobs::latest()->get();
             $apply_job = $apply->count();
             $wait = 0;
+            $proses = 0;
             $pass = 0;
             $failed = 0;
             foreach($apply as $a){
@@ -25,18 +32,26 @@ class DashboardController extends Controller
                         $wait++;
                         break;
                     case 1:
-                        $pass++;
+                        $proses++;
                         break;
                     case 2:
                         $failed++;
                         break;
-                    
+                    case 3:
+                        $pass++; 
+                        break;
+                    case 4:
+                        $failed++; 
+                        break;
+                    case 5:
+                        $failed++; 
+                        break;
                     default:
                         # code...
                         break;
                 }
             }
-            return view('pages.admin.dashboard',compact(['data','apply','wait','pass','failed','apply_job']));
+            return view('pages.admin.dashboard',compact(['applyjobs','data','apply','wait','proses','pass','failed','apply_job']));
         }
         if(auth()->user()->role == 'User'){
             $apply = ApplyJobs::where('user_id','=',auth()->user()->id)->latest()->get();

@@ -72,6 +72,17 @@ class JobseekersController extends Controller
                         ->orderBy('apply_jobs.created_at','DESC')->get(['apply_jobs.*','departements.departement','positions.position','jobs.job_name','jobs.salary']);
         return view('pages.user.applyjobs.index',compact(['data','apply_job']));
     }
+    public function cancel_apply(string $id){
+        $data =  ApplyJobs::findOrFail($id);
+        $data->update(['status_apply' => 5]);
+        return redirect()->route('apply_job');
+    }
+
+    public function hapus_apply(string $id){
+        $data =  ApplyJobs::findOrFail($id);
+        $data->delete();
+        return redirect()->route('apply_job');
+    }
 
     public function apply_test(string $id){
         $data = $this->getPageData();
